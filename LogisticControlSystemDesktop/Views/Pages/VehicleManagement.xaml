@@ -1,0 +1,125 @@
+﻿<UserControl x:Class="LogisticControlSystemDesktop.Views.Pages.VehicleManagement"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:prism="http://prismlibrary.com/"
+             xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+             xmlns:local="clr-namespace:LogisticControlSystemDesktop.Views.Pages"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             prism:ViewModelLocator.AutoWireViewModel="True">
+    <UserControl.Resources>
+        <SolidColorBrush x:Key="TextBox.Static.Border" Color="#5e69ee"/>
+        <SolidColorBrush x:Key="TextBox.MouseOver.Border" Color="#FF4855ED"/>
+        <SolidColorBrush x:Key="TextBox.Focus.Border" Color="#FF767FEE"/>
+        <Style x:Key="CustomTextBoxSearchStyle" TargetType="{x:Type TextBox}">
+            <Setter Property="Background" Value="#fff"/>
+            <Setter Property="BorderBrush" Value="{StaticResource TextBox.Static.Border}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="Height" Value="35"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="AllowDrop" Value="true"/>
+            <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst"/>
+            <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <Border x:Name="border" CornerRadius="5" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="True">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="auto"/>
+                                </Grid.ColumnDefinitions>
+                                <ScrollViewer Grid.Column="0" x:Name="PART_ContentHost" Padding="5" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+                                <icon:PackIconMaterial Grid.Column="1" Kind="Magnify" Width="20" Height="20" Margin="5" Foreground="{StaticResource TextBox.Static.Border}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Opacity" TargetName="border" Value="0.56"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource TextBox.MouseOver.Border}"/>
+                            </Trigger>
+                            <Trigger Property="IsKeyboardFocused" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource TextBox.Focus.Border}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="IsInactiveSelectionHighlightEnabled" Value="true"/>
+                        <Condition Property="IsSelectionActive" Value="false"/>
+                    </MultiTrigger.Conditions>
+                    <Setter Property="SelectionBrush" Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}"/>
+                </MultiTrigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <Border Background="#FFF4F4FB" CornerRadius="10" Margin="10">
+            <Border.Effect>
+                <DropShadowEffect ShadowDepth="0" Opacity="0.5" BlurRadius="10" Color="#5e69ee"/>
+            </Border.Effect>
+            <Grid Margin="20">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" Text="Транспортные средства" Foreground="#5e69ee" FontWeight="Bold" FontSize="20" Margin="0 0 0 20"></TextBlock>
+                <TextBox Grid.Row="0" Style="{DynamicResource CustomTextBoxSearchStyle}" Width="400" HorizontalAlignment="Right"></TextBox>
+                <DataGrid Grid.Row="1" ItemsSource="{Binding Vihecles}" Style="{DynamicResource CustomDataGridStyle}" CellStyle="{DynamicResource CustomDataGridCellStyle}" ColumnHeaderStyle="{DynamicResource CustomDataGridColumnHeaderStyle}" RowStyle="{DynamicResource CustomDataGridRowStyle}">
+                    <DataGrid.Columns>
+                        <DataGridCheckBoxColumn CanUserResize="False" Width="auto" ElementStyle="{StaticResource CustomCheckBoxStyle}">
+                            <DataGridCheckBoxColumn.HeaderTemplate>
+                                <DataTemplate>
+                                    <CheckBox Style="{StaticResource CustomCheckBoxStyle}"/>
+                                </DataTemplate>
+                            </DataGridCheckBoxColumn.HeaderTemplate>
+                        </DataGridCheckBoxColumn>
+                        <DataGridTextColumn Header="#" IsReadOnly="True" CanUserResize="False" Width="auto" Binding="{Binding Number}"/>
+                        <DataGridTemplateColumn Header="Владелец" IsReadOnly="True" Width="*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Border Width="25" Height="25" CornerRadius="50" Margin="0 0 10 0" Background="{Binding BgColor}">
+                                            <TextBlock Text="{Binding Character}" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" Margin="0 0 0 1"/>
+                                        </Border>
+                                        <TextBlock Text="{Binding Name}" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTextColumn Header="Тип" IsReadOnly="True" CanUserResize="False" Width="*" Binding="{Binding Type}"/>
+                        <DataGridTextColumn Header="Марка" IsReadOnly="True" Width="*" Binding="{Binding Brand}"/>
+                        <DataGridTextColumn Header="Регестрационны номер" IsReadOnly="True" Width="*" Binding="{Binding RegistrationNumber}"/>
+                        <DataGridTextColumn Header="Вместимость" IsReadOnly="True" Width="*" Binding="{Binding Capacity}"/>
+                        <DataGridTextColumn Header="Грузоподъемность" IsReadOnly="True" Width="*" Binding="{Binding LoadCapacity}"/>
+                        <DataGridTemplateColumn Header="Операции" IsReadOnly="True" Width="auto">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Button Style="{StaticResource gridEditButton}">
+                                            <icon:PackIconMaterial Kind="PencilOutline" Width="12" Height="12" VerticalAlignment="Center"/>
+                                        </Button>
+                                        <Button Style="{StaticResource gridRemoveButton}" Margin="5 0 0 0">
+                                            <icon:PackIconMaterial Kind="DeleteOutline" Width="12" Height="12" VerticalAlignment="Center"/>
+                                        </Button>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>
