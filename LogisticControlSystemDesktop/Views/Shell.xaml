@@ -86,6 +86,11 @@
                         <MouseBinding MouseAction="LeftClick" Command="{Binding Open}" CommandParameter="Пустая страница" />
                     </MenuItem.InputBindings>
                 </MenuItem>
+                <MenuItem Header="Транспортное средство" Foreground="#5e69ee">
+                    <MenuItem.InputBindings>
+                        <MouseBinding MouseAction="LeftClick" Command="{Binding Open}" CommandParameter="Создать ТС" />
+                    </MenuItem.InputBindings>
+                </MenuItem>
             </MenuItem>
             <MenuItem Header="Вид">
                 <MenuItem Header="Темы" Foreground="#5e69ee">

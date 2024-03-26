@@ -1,7 +1,7 @@
 ﻿using GMap.NET.MapProviders;
 using GMap.NET.WindowsPresentation;
 using GMap.NET;
-using LogisticControlSystemDesktop.ViewModels;
+using LogisticControlSystemDesktop.ViewModels.Pages;
 using MahApps.Metro.IconPacks.Converter;
 using MahApps.Metro.IconPacks;
 using System.Net;

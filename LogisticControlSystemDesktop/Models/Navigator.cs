@@ -71,6 +71,18 @@ namespace LogisticControlSystemDesktop.Models
                 OnClose?.Invoke(item.Id);
             }
         }
+
+        public void Close(UserControl screan)
+        {
+            var item = _screens.FirstOrDefault(s => object.ReferenceEquals(s.Screen, screan));
+
+            if (item != null && item != _screens.First())
+            {
+                _screens.Remove(item);
+
+                OnClose?.Invoke(item.Id);
+            }
+        }
     }
 
     public class NavigateItem

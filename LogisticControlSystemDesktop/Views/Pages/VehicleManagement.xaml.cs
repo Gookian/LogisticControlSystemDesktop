@@ -1,4 +1,4 @@
-﻿using LogisticControlSystemDesktop.ViewModels;
+﻿using LogisticControlSystemDesktop.ViewModels.Pages;
 using System.Windows.Controls;
 
 namespace LogisticControlSystemDesktop.Views.Pages
@@ -12,7 +12,7 @@ namespace LogisticControlSystemDesktop.Views.Pages
         {
             InitializeComponent();
 
-            DataContext = new VehicleManagementViewModel();
+            DataContext = new VehicleManagementViewModel(myData);
         }
     }
 }

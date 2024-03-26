@@ -1,4 +1,5 @@
-﻿using LogisticControlSystemDesktop.Views;
+﻿using LogisticControlSystemDesktop.REST.API;
+using LogisticControlSystemDesktop.Views;
 using Prism.Ioc;
 using Prism.Modularity;
 using Prism.Unity;
@@ -17,6 +18,11 @@ namespace LogisticControlSystemDesktop
     /// </summary>
     public partial class App : PrismApplication
     {
+        public App()
+        {
+            new VehicleAPI();
+        }
+
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
 

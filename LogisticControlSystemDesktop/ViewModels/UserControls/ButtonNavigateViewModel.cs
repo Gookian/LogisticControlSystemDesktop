@@ -5,7 +5,7 @@ using System;
 using System.ComponentModel;
 using System.Windows.Media;
 
-namespace LogisticControlSystemDesktop.ViewModels
+namespace LogisticControlSystemDesktop.ViewModels.UserControls
 {
     public class ButtonNavigateViewModel : BindableBase, INotifyPropertyChanged
     {

@@ -1,5 +1,8 @@
 ﻿using LogisticControlSystemDesktop.ViewModels;
+using System.Reflection;
+using System;
 using System.Windows;
+using System.Net.Http;
 
 namespace LogisticControlSystemDesktop.Views
 {

@@ -5,7 +5,7 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Media;
 
-namespace LogisticControlSystemDesktop.ViewModels
+namespace LogisticControlSystemDesktop.ViewModels.Pages
 {
     public class HomeViewModel : BindableBase
     {

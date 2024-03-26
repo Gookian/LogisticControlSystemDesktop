@@ -1,4 +1,6 @@
 ﻿using LogisticControlSystemDesktop.Models;
+using LogisticControlSystemDesktop.Models.REST.API;
+using LogisticControlSystemDesktop.ViewModels.UserControls;
 using LogisticControlSystemDesktop.Views.Pages;
 using LogisticControlSystemDesktop.Views.UserControls;
 using Prism.Commands;
@@ -6,6 +8,8 @@ using Prism.Mvvm;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace LogisticControlSystemDesktop.ViewModels
@@ -19,7 +23,7 @@ namespace LogisticControlSystemDesktop.ViewModels
         private Guid _target;
         private StackPanel _navigatePanel;
         private Dictionary<Guid, ButtonNavigate> _buttonNavigates = new Dictionary<Guid, ButtonNavigate>();
-        private Dictionary<string, UserControl> _registerScreen = new Dictionary<string, UserControl>();
+        private Dictionary<string, Type> _registerScreen = new Dictionary<string, Type>();
 
         public ShellViewModel(Border border, StackPanel navigatePanel)
         {
@@ -34,9 +38,10 @@ namespace LogisticControlSystemDesktop.ViewModels
 
             navigator.Open(new Home(), "Главная");
 
-            _registerScreen.Add("Пустая страница", new UnimplementedFunctionalityStub());
-            _registerScreen.Add("Главная", new Home());
-            _registerScreen.Add("Управление транспортными средствами", new VehicleManagement());
+            _registerScreen.Add("Пустая страница", typeof(UnimplementedFunctionalityStub));
+            _registerScreen.Add("Главная", typeof(Home));
+            _registerScreen.Add("Управление транспортными средствами", typeof(VehicleManagement));
+            _registerScreen.Add("Создать ТС", typeof(Create));
         }
 
         public void Open_Click(string title)
@@ -45,7 +50,31 @@ namespace LogisticControlSystemDesktop.ViewModels
             {
                 var screen = _registerScreen[title];
 
-                Navigator.Instance.Open(screen, title);
+                if (screen != typeof(Create))
+                {
+                    object instance = Activator.CreateInstance(screen);
+                    Navigator.Instance.Open((UserControl)instance, title);
+                }
+                else
+                {
+                    Assembly assembly = Assembly.GetExecutingAssembly();
+                    BaseEntityAPI api = assembly.CreateInstance("LogisticControlSystemDesktop.REST.API.VehicleAPI") as BaseEntityAPI;
+                    Type typeEntyty = Type.GetType("LogisticControlSystemDesktop.Models.Vehicle");
+                    Type typeView = Type.GetType("LogisticControlSystemDesktop.Views.Pages.Create");
+
+                    string screenName = "";
+                    switch (title)
+                    {
+                        case "Создать ТС":
+                            screenName = "Cоздание транспортного средства";
+                            break;
+                        default:
+                            break;
+                    }
+
+                    object instance = Activator.CreateInstance(typeView, new object[] { screenName, api, typeEntyty });
+                    Navigator.Instance.Open((UserControl)instance, title);
+                }
             }
             catch (Exception) { }
         }

@@ -1,4 +1,4 @@
-﻿using LogisticControlSystemDesktop.ViewModels;
+﻿using LogisticControlSystemDesktop.ViewModels.UserControls;
 using System;
 using System.Windows.Controls;
 
