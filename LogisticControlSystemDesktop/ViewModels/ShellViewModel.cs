@@ -41,7 +41,9 @@ namespace LogisticControlSystemDesktop.ViewModels
             _registerScreen.Add("Пустая страница", typeof(UnimplementedFunctionalityStub));
             _registerScreen.Add("Главная", typeof(Home));
             _registerScreen.Add("Управление транспортными средствами", typeof(VehicleManagement));
-            _registerScreen.Add("Создать ТС", typeof(Create));
+            _registerScreen.Add("Управление складами", typeof(WarehouseManagement));
+            _registerScreen.Add("Vehicle", typeof(Create));
+            _registerScreen.Add("Warehouse", typeof(Create));
         }
 
         public void Open_Click(string title)
@@ -58,15 +60,18 @@ namespace LogisticControlSystemDesktop.ViewModels
                 else
                 {
                     Assembly assembly = Assembly.GetExecutingAssembly();
-                    BaseEntityAPI api = assembly.CreateInstance("LogisticControlSystemDesktop.REST.API.VehicleAPI") as BaseEntityAPI;
-                    Type typeEntyty = Type.GetType("LogisticControlSystemDesktop.Models.Vehicle");
+                    BaseEntityAPI api = assembly.CreateInstance($"LogisticControlSystemDesktop.REST.API.{title}API") as BaseEntityAPI;
+                    Type typeEntyty = Type.GetType($"LogisticControlSystemDesktop.Models.{title}");
                     Type typeView = Type.GetType("LogisticControlSystemDesktop.Views.Pages.Create");
 
                     string screenName = "";
                     switch (title)
                     {
-                        case "Создать ТС":
+                        case "Vehicle":
                             screenName = "Cоздание транспортного средства";
+                            break;
+                        case "Warehouse":
+                            screenName = "Cоздание склада";
                             break;
                         default:
                             break;

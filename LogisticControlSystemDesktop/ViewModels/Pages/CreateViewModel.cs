@@ -8,42 +8,43 @@ using LogisticControlSystemDesktop.Models;
 using System.Linq;
 using LogisticControlSystemDesktop.ViewModels.UserControls;
 using System.Windows;
+using Prism.Mvvm;
+using System.ComponentModel;
 using System.Collections.Generic;
 
 namespace LogisticControlSystemDesktop.ViewModels.Pages
 {
-    public class VehicleEditViewModel
+    public class CreateViewModel : BindableBase, INotifyPropertyChanged
     {
         public string ScreenName { get; set; }
 
         public ObservableCollection<UserControl> FormFields { get; set; }
 
-        public DelegateCommand SaveClick { get; set; }
+        public DelegateCommand CreateClick { get; set; }
 
-        public delegate void SavedHandler();
-        public event SavedHandler OnSaved;
+        public delegate void CreateHandler();
+        public event CreateHandler OnCreated;
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         private List<StructureItem> _structureItems;
         private BaseEntityAPI _baseEntityAPI1;
         private UserControl _view;
         private Type _type;
-        private int _id;
 
-        public VehicleEditViewModel(UserControl view, int id, string screanName, BaseEntityAPI baseEntityAPI, Type typeItem)
+        public CreateViewModel(UserControl view, string screanName, BaseEntityAPI baseEntityAPI, Type typeItem)
         {
             _view = view;
             _baseEntityAPI1 = baseEntityAPI;
             _type = typeItem;
-            _id = id;
 
             ScreenName = screanName;
 
             FormFields = new ObservableCollection<UserControl>();
 
-            SaveClick = new DelegateCommand(Save_Click);
+            CreateClick = new DelegateCommand(Create_Click);
 
             LoadStructure(baseEntityAPI);
-            LoadData(baseEntityAPI, id);
         }
 
         private void LoadStructure(BaseEntityAPI api)
@@ -63,22 +64,7 @@ namespace LogisticControlSystemDesktop.ViewModels.Pages
             }
         }
 
-        private void LoadData(BaseEntityAPI api, int id)
-        {
-            var data = api.Get(id);
-            var type = data.GetType();
-            foreach (var item in _structureItems)
-            {
-                var property = _type.GetProperty(item.Name);
-                var value = property.GetValue(data);
-
-                var viewModel = FindFieldViewModelByName(item.Name);
-
-                viewModel.Value = value.ToString();
-            }
-        }
-
-        private BaseFieldViewModel FindFieldViewModelByName(string name)
+        public BaseFieldViewModel FindFieldViewModelByName(string name)
         {
             var userControl = FormFields.FirstOrDefault(x => (x.DataContext as BaseFieldViewModel).FieldName == name);
             var viewModel = (userControl.DataContext as BaseFieldViewModel);
@@ -86,14 +72,9 @@ namespace LogisticControlSystemDesktop.ViewModels.Pages
             return viewModel;
         }
 
-        private void Save_Click()
+        private void Create_Click()
         {
             var instance = Activator.CreateInstance(_type);
-
-            var namePropertyId = _type.Name + "Id";
-            var propertyId = _type.GetProperty(namePropertyId);
-
-            propertyId.SetValue(instance, _id);
 
             foreach (var item in _structureItems)
             {
@@ -116,17 +97,23 @@ namespace LogisticControlSystemDesktop.ViewModels.Pages
                 }
             }
 
-            var result = _baseEntityAPI1.Edit(instance);
+            var result = _baseEntityAPI1.Create(instance);
 
             if (result != null)
             {
-                OnSaved?.Invoke();
+                OnCreated?.Invoke();
                 Navigator.Instance.Close(_view);
             }
             else
             {
                 MessageBox.Show("error");
             }
+        }
+
+        private void OnPropertyChanged(string propName)
+        {
+            if (PropertyChanged != null)
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
         }
     }
 }

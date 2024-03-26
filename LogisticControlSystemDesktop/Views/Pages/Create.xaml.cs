@@ -14,7 +14,7 @@ namespace LogisticControlSystemDesktop.Views.Pages
         {
             InitializeComponent();
 
-            DataContext = new VehicleCreateViewModel(this, screenName, baseEntityAPI, type);
+            DataContext = new CreateViewModel(this, screenName, baseEntityAPI, type);
         }
     }
 }

@@ -68,7 +68,7 @@ namespace LogisticControlSystemDesktop.Models
         public void Edit_Click()
         {
             var view = new Edit(Number, "Редактирование транспортного средства", VehicleAPI.Instance, typeof(Vehicle));
-            var viewModel = view.DataContext as VehicleEditViewModel;
+            var viewModel = view.DataContext as EditViewModel;
 
             viewModel.OnSaved += ViewModel_OnSaved;
 

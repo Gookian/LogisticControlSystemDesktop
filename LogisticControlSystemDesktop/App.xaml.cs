@@ -21,6 +21,7 @@ namespace LogisticControlSystemDesktop
         public App()
         {
             new VehicleAPI();
+            new WarehouseAPI();
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)

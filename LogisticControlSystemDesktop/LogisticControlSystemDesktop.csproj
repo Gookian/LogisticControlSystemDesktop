@@ -151,6 +151,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Models\ActiveRouteData.cs" />
+    <Compile Include="Models\REST\API\WarehouseAPI.cs" />
+    <Compile Include="Models\Warehouse.cs" />
+    <Compile Include="Models\Сonverters\WarehouseConverter.cs" />
     <Compile Include="Models\Сonverters\VehicleConverter.cs" />
     <Compile Include="Models\Navigator.cs" />
     <Compile Include="Models\Parametr.cs" />
@@ -158,11 +161,13 @@
     <Compile Include="Models\REST\API\VehicleAPI.cs" />
     <Compile Include="Models\StructureItem.cs" />
     <Compile Include="Models\Vehicle.cs" />
-    <Compile Include="ViewModels\Pages\VehicleCreateViewModel.cs" />
-    <Compile Include="ViewModels\Pages\VehicleEditViewModel.cs" />
+    <Compile Include="ViewModels\Pages\CreateViewModel.cs" />
+    <Compile Include="ViewModels\Pages\EditViewModel.cs" />
+    <Compile Include="ViewModels\Pages\WarehouseManagementViewModel.cs" />
     <Compile Include="ViewModels\UserControls\BaseFieldViewModel.cs" />
     <Compile Include="ViewModels\UserControls\ComboBoxValidationViewModel.cs" />
     <Compile Include="ViewModels\UserControls\TextBoxValidationViewModel.cs" />
+    <Compile Include="ViewModels\WarehouseViewModel.cs" />
     <Compile Include="ViewModels\VehicleViewModel.cs" />
     <Compile Include="ViewModels\UserControls\ButtonNavigateViewModel.cs" />
     <Compile Include="ViewModels\Pages\HomeViewModel.cs" />
@@ -179,6 +184,9 @@
     </Compile>
     <Compile Include="Views\Pages\Edit.xaml.cs">
       <DependentUpon>Edit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\WarehouseManagement.xaml.cs">
+      <DependentUpon>WarehouseManagement.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Pages\VehicleManagement.xaml.cs">
       <DependentUpon>VehicleManagement.xaml</DependentUpon>
@@ -239,6 +247,10 @@
     <Page Include="Views\Pages\Edit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\WarehouseManagement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Pages\VehicleManagement.xaml">
       <SubType>Designer</SubType>
