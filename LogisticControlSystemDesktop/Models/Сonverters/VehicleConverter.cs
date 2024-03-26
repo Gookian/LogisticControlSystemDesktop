@@ -8,27 +8,34 @@ namespace LogisticControlSystemDesktop.Models.converters
     {
         private BrushConverter _converter = new BrushConverter();
 
-        public IEnumerable<VehicleViewModel> Convert(IEnumerable<Vehicle> vehicles)
+        public IEnumerable<VehicleViewModel> Convert(IEnumerable<Vehicle> Items)
         {
             List<VehicleViewModel> vehicleDatas = new List<VehicleViewModel>();
 
-            foreach (var vehicle in vehicles)
+            foreach (var item in Items)
             {
-                vehicleDatas.Add(new VehicleViewModel()
-                {
-                    Number = vehicle.VehicleId,
-                    Brand = vehicle.Brand,
-                    RegistrationNumber = vehicle.RegistrationNumber,
-                    Capacity = vehicle.Capacity + " м.кв.",
-                    LoadCapacity = vehicle.LoadCapacity + " тон",
-                    Type = "",
-                    Name = "",
-                    Character = "",
-                    BgColor = (SolidColorBrush)_converter.ConvertFromString("#f28d82")
-                });
+                vehicleDatas.Add(Convert(item));
             }
 
             return vehicleDatas;
+        }
+
+        public VehicleViewModel Convert(Vehicle item)
+        {
+            var result = new VehicleViewModel()
+            {
+                Number = item.VehicleId,
+                Brand = item.Brand,
+                RegistrationNumber = item.RegistrationNumber,
+                Capacity = item.Capacity + " м.кв.",
+                LoadCapacity = item.LoadCapacity + " тон",
+                Type = "",
+                Name = "",
+                Character = "",
+                BgColor = (SolidColorBrush)_converter.ConvertFromString("#f28d82")
+            };
+
+            return result;
         }
     }
 }

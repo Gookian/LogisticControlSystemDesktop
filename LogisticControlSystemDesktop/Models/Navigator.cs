@@ -83,6 +83,11 @@ namespace LogisticControlSystemDesktop.Models
                 OnClose?.Invoke(item.Id);
             }
         }
+
+        public List<NavigateItem> GetAllNavigateItem()
+        {
+            return _screens;
+        }
     }
 
     public class NavigateItem

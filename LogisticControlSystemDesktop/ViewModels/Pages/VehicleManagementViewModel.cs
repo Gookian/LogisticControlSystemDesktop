@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 
@@ -24,6 +25,7 @@ namespace LogisticControlSystemDesktop.ViewModels.Pages
 
                 _itemSourceList = new CollectionViewSource() { Source = Vihecles };
                 _myData = _itemSourceList.View;
+                OnPropertyChanged(nameof(Vihecles));
             }
         }
 
@@ -88,6 +90,18 @@ namespace LogisticControlSystemDesktop.ViewModels.Pages
             ParametrSelected = Parametrs[0];
 
             UpdateVehicles();
+        }
+
+        public void SignOnCreated(CreateViewModel viewModel)
+        {
+            MessageBox.Show("as");
+            viewModel.OnCreated += ViewModel_OnCreated;
+        }
+
+        private void ViewModel_OnCreated(object item)
+        {
+            var element = (Vehicle)item;
+            _vihecles.Add(_converter.Convert(element));
         }
 
         private void VehicleData_VehicleDeleted(int id)

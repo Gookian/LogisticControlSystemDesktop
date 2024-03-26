@@ -86,6 +86,17 @@ namespace LogisticControlSystemDesktop.ViewModels.Pages
             UpdateVehicles();
         }
 
+        public void SignOnCreated(CreateViewModel viewModel)
+        {
+            viewModel.OnCreated += ViewModel_OnCreated;
+        }
+
+        private void ViewModel_OnCreated(object item)
+        {
+            var element = (Warehouse)item;
+            _warehouses.Add(_converter.Convert(element));
+        }
+
         private void ViewModel_OnDeleted(int id)
         {
             var viewModel = _warehouses.FirstOrDefault(x => x.Number == id);

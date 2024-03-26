@@ -11,13 +11,20 @@ namespace LogisticControlSystemDesktop.Models.converters
 
             foreach (var item in items)
             {
-                result.Add(new WarehouseViewModel()
-                {
-                    Number = item.WarehouseId,
-                    Name = item.Name,
-                    Address = item.Address
-                });
+                result.Add(Convert(item));
             }
+
+            return result;
+        }
+
+        public WarehouseViewModel Convert(Warehouse item)
+        {
+            var result = new WarehouseViewModel()
+            {
+                Number = item.WarehouseId,
+                Name = item.Name,
+                Address = item.Address
+            };
 
             return result;
         }
