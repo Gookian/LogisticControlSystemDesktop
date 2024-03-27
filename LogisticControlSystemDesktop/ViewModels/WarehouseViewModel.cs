@@ -13,6 +13,8 @@ namespace LogisticControlSystemDesktop.ViewModels
         public int Number { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
+        public double Latitude { get; set; }
+        public double Longitude { get; set; }
 
         public DelegateCommand DeleteClick { get; set; }
         public DelegateCommand EditClick { get; set; }
@@ -34,9 +36,13 @@ namespace LogisticControlSystemDesktop.ViewModels
 
             Name = warehouse.Name;
             Address = warehouse.Address;
+            Latitude = warehouse.Latitude;
+            Longitude = warehouse.Longitude;
 
             OnPropertyChanged(nameof(Name));
             OnPropertyChanged(nameof(Address));
+            OnPropertyChanged(nameof(Latitude));
+            OnPropertyChanged(nameof(Longitude));
         }
 
         public void Delete_Click()

@@ -12,7 +12,8 @@ namespace LogisticControlSystemDesktop.ViewModels.UserControls
     {
         public override string FieldName { get => base.FieldName; set => base.FieldName = value; }
         public string Title { get; set; } = "Заголовок";
-        string Text { get; set; } = "0/10";
+        public override string Text { get => base.Text; set => base.Text = value; }
+        //string Text { get; set; } = "0/10";
         public string Error { get; set; }
 
         //private string _value;//#FFEE5E5E

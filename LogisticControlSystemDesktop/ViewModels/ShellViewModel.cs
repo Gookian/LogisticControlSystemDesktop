@@ -7,6 +7,7 @@ using Prism.Commands;
 using Prism.Mvvm;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Windows;
@@ -42,8 +43,18 @@ namespace LogisticControlSystemDesktop.ViewModels
             _registerScreen.Add("Главная", typeof(Home));
             _registerScreen.Add("Управление транспортными средствами", typeof(VehicleManagement));
             _registerScreen.Add("Управление складами", typeof(WarehouseManagement));
+            _registerScreen.Add("Управление маршрутами", typeof(FlightManagement));
+            _registerScreen.Add("Управление заказами", typeof(OrderManagement));
+            _registerScreen.Add("Управление посылками", typeof(PackageManagement));
+            _registerScreen.Add("Управление товарами", typeof(ProductManagement));
+            _registerScreen.Add("Управление данными товаров", typeof(ProductDataManagement));
+            _registerScreen.Add("Управление точками доставки", typeof(DeliveryPointManagement));
             _registerScreen.Add("Vehicle", typeof(Create));
             _registerScreen.Add("Warehouse", typeof(Create));
+            _registerScreen.Add("DeliveryPoint", typeof(Create));
+            _registerScreen.Add("Order", typeof(Create));
+            _registerScreen.Add("Product", typeof(Create));
+            _registerScreen.Add("ProductData", typeof(Create));
         }
 
         public void Open_Click(string title)
@@ -73,12 +84,24 @@ namespace LogisticControlSystemDesktop.ViewModels
                         case "Warehouse":
                             screenName = "Cоздание склада";
                             break;
+                        case "DeliveryPoint":
+                            screenName = "Cоздание точки доставки";
+                            break;
+                        case "Order":
+                            screenName = "Cоздание заказа";
+                            break;
+                        case "Product":
+                            screenName = "Cоздание товара";
+                            break;
+                        case "ProductData":
+                            screenName = "Cоздание данных товара";
+                            break;
                         default:
                             break;
                     }
 
                     object instance = Activator.CreateInstance(typeView, new object[] { screenName, api, typeEntyty });
-                    Navigator.Instance.Open((UserControl)instance, title);
+                    Navigator.Instance.Open((UserControl)instance, screenName);
                 }
             }
             catch (Exception) { }

@@ -23,7 +23,9 @@ namespace LogisticControlSystemDesktop.Models.converters
             {
                 Number = item.WarehouseId,
                 Name = item.Name,
-                Address = item.Address
+                Address = item.Address,
+                Latitude = item.Latitude,
+                Longitude = item.Longitude
             };
 
             return result;

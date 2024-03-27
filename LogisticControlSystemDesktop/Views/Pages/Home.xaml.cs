@@ -22,6 +22,51 @@ namespace LogisticControlSystemDesktop.Views.Pages
             InitializeComponent();
 
             DataContext = new HomeViewModel();
+
+            var converter = new BrushConverter();
+
+            SetMarker(new PointLatLng(56.4641294015001, 84.950789809227), new PackIconMaterial
+            {
+                Kind = PackIconMaterialKind.TruckDelivery,
+                Width = 30,
+                Height = 30,
+                Foreground = (Brush)converter.ConvertFromString("#5e69ee")
+            });
+            SetMarker(new PointLatLng(56.5038359606628, 84.9486654996872), new PackIconMaterial
+            {
+                Kind = PackIconMaterialKind.TruckDelivery,
+                Width = 30,
+                Height = 30,
+                Foreground = (Brush)converter.ConvertFromString("#5e69ee")
+            });
+            SetMarker(new PointLatLng(56.4824786695944, 85.008784532547), new PackIconMaterial
+            {
+                Kind = PackIconMaterialKind.TruckDelivery,
+                Width = 30,
+                Height = 30,
+                Foreground = (Brush)converter.ConvertFromString("#5e69ee")
+            });
+            SetMarker(new PointLatLng(56.5037205001595, 85.0111609697342), new PackIconMaterial
+            {
+                Kind = PackIconMaterialKind.Truck,
+                Width = 30,
+                Height = 30,
+                Foreground = (Brush)converter.ConvertFromString("#FFAF0000")
+            });
+            SetMarker(new PointLatLng(56.533657398552, 85.1170116662979), new PackIconMaterial
+            {
+                Kind = PackIconMaterialKind.TruckFast,
+                Width = 30,
+                Height = 30,
+                Foreground = (Brush)converter.ConvertFromString("#FFD6A200")
+            });
+            SetMarker(new PointLatLng(56.5356215873959, 84.8392099142075), new PackIconMaterial
+            {
+                Kind = PackIconMaterialKind.TruckFast,
+                Width = 30,
+                Height = 30,
+                Foreground = (Brush)converter.ConvertFromString("#FFD6A200")
+            });
         }
 
         private void map_Loaded(object sender, RoutedEventArgs e)
@@ -94,7 +139,7 @@ namespace LogisticControlSystemDesktop.Views.Pages
         {
             Point clickPoint = e.GetPosition(mapControl);
             PointLatLng point = mapControl.FromLocalToLatLng((int)clickPoint.X, (int)clickPoint.Y);
-            //MessageBox.Show(point.Lat + " " + point.Lng);
+            MessageBox.Show(point.Lat + " " + point.Lng);
             GMapMarker marker = new GMapMarker(point);
 
             var icon = new PackIconMaterial
@@ -104,6 +149,15 @@ namespace LogisticControlSystemDesktop.Views.Pages
             icon.Width = 30;
             icon.Height = 30;
 
+            marker.Shape = icon;
+            marker.Offset = new Point(-icon.Width / 2, -icon.Height / 2);
+
+            mapControl.Markers.Add(marker);
+        }
+
+        private void SetMarker(PointLatLng point, PackIconMaterial icon)
+        {
+            GMapMarker marker = new GMapMarker(point);
             marker.Shape = icon;
             marker.Offset = new Point(-icon.Width / 2, -icon.Height / 2);
 

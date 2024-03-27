@@ -22,6 +22,14 @@ namespace LogisticControlSystemDesktop
         {
             new VehicleAPI();
             new WarehouseAPI();
+            new FlightAPI();
+            new OrderAPI();
+            new PackageAPI();
+            new ProductAPI();
+            new ProductDataAPI();
+            new DeliveryAPI();
+            new DeliveryPointAPI();
+
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)

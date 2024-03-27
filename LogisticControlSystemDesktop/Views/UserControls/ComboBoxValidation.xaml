@@ -19,7 +19,7 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
-            <ComboBox Grid.Column="0" ItemsSource="{Binding Path=Parametrs}" SelectedValue="{Binding Path=ParametrSelected}" Height="40" Margin="0 0 5 0" Style="{DynamicResource CustomComboBoxStyle}"/>
+            <ComboBox ItemsSource="{Binding Path=Parametrs,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" SelectedValue="{Binding Path=ParametrSelected}" Height="40" Margin="0 0 5 0" Style="{DynamicResource CustomComboBoxStyle}"/>
             <Button Grid.Column="1" Width="200" Content="Создать" Margin="5 0 0 0" Style="{DynamicResource CustomButtonStyle}"/>
         </Grid>
         <TextBlock Grid.Row="2" Text="{Binding Error}" FontSize="13" Foreground="#FFEE5E5E" Margin="5 5 0 0"/>

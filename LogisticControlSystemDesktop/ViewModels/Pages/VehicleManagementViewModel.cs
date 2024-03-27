@@ -94,7 +94,6 @@ namespace LogisticControlSystemDesktop.ViewModels.Pages
 
         public void SignOnCreated(CreateViewModel viewModel)
         {
-            MessageBox.Show("as");
             viewModel.OnCreated += ViewModel_OnCreated;
         }
 

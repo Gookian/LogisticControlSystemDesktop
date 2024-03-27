@@ -19,7 +19,7 @@
                         <RowDefinition Height="auto"/>
                     </Grid.RowDefinitions>
                     <TextBlock Grid.Row="0" Text="{Binding ScreenName}" Foreground="#5e69ee" FontWeight="Bold" FontSize="20" Margin="0 0 0 20"></TextBlock>
-                    <ScrollViewer Grid.Row="1" Grid.RowSpan="2"  Style="{DynamicResource CustomScrollViewerStyle}" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                    <ScrollViewer Grid.Row="1"  Style="{DynamicResource CustomScrollViewerStyle}" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
                         <ItemsControl ItemsSource="{Binding FormFields}">
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>

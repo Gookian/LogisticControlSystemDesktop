@@ -29,9 +29,9 @@ namespace LogisticControlSystemDesktop.Models.converters
                 RegistrationNumber = item.RegistrationNumber,
                 Capacity = item.Capacity + " м.кв.",
                 LoadCapacity = item.LoadCapacity + " тон",
-                Type = "",
-                Name = "",
-                Character = "",
+                Type = item.Type,
+                Name = item.Name,
+                Character = item.Name.Substring(0, 1),
                 BgColor = (SolidColorBrush)_converter.ConvertFromString("#f28d82")
             };
 

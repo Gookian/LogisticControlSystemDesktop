@@ -44,11 +44,15 @@ namespace LogisticControlSystemDesktop.Models
         {
             var vehicle = (Vehicle)VehicleAPI.Instance.Get(Number);
 
+            Type = vehicle.Type;
+            Name = vehicle.Name;
             Brand = vehicle.Brand;
             RegistrationNumber = vehicle.RegistrationNumber;
             Capacity = vehicle.Capacity + " м.кв.";
             LoadCapacity = vehicle.LoadCapacity + " тон";
 
+            OnPropertyChanged(nameof(Type));
+            OnPropertyChanged(nameof(Name));
             OnPropertyChanged(nameof(Brand));
             OnPropertyChanged(nameof(RegistrationNumber));
             OnPropertyChanged(nameof(Capacity));

@@ -58,7 +58,7 @@ namespace LogisticControlSystemDesktop.ViewModels.Pages
                 }
                 else
                 {
-                    FormFields.Add(new ComboBoxValidation(item.Name, item.Title, ""));
+                    FormFields.Add(new ComboBoxValidation(item.Name, item.Title, 1));
                 }
             }
         }
@@ -107,6 +107,9 @@ namespace LogisticControlSystemDesktop.ViewModels.Pages
                 {
                     case TypeCode.Int32:
                         property.SetValue(instance, Convert.ToInt32(viewModel.Value));
+                        break;
+                    case TypeCode.Double:
+                        property.SetValue(instance, Convert.ToDouble(viewModel.Value));
                         break;
                     case TypeCode.String:
                         property.SetValue(instance, viewModel.Value);

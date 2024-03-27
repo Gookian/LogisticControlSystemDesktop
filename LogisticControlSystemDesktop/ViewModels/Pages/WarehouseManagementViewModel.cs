@@ -79,7 +79,9 @@ namespace LogisticControlSystemDesktop.ViewModels.Pages
             {
                 new Parametr { ID = 1, Text = "#", PropertyName = "Number" },
                 new Parametr { ID = 2, Text = "Наименование", PropertyName = "Name" },
-                new Parametr { ID = 2, Text = "Адрес", PropertyName = "Address" }
+                new Parametr { ID = 3, Text = "Адрес", PropertyName = "Address" },
+                new Parametr { ID = 4, Text = "Широта", PropertyName = "Latitude" },
+                new Parametr { ID = 5, Text = "Долгота", PropertyName = "Longitude" },
             };
             ParametrSelected = Parametrs[0];
 

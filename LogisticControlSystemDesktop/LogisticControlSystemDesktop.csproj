@@ -151,8 +151,38 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Models\ActiveRouteData.cs" />
+    <Compile Include="Models\Delivery.cs" />
+    <Compile Include="Models\DeliveryPoint.cs" />
+    <Compile Include="Models\Flight.cs" />
+    <Compile Include="Models\Order.cs" />
+    <Compile Include="Models\OrderDetail.cs" />
+    <Compile Include="Models\Package.cs" />
+    <Compile Include="Models\PackageState.cs" />
+    <Compile Include="Models\PackageСontent.cs" />
+    <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\ProductData.cs" />
+    <Compile Include="Models\ProductInWarehouse.cs" />
+    <Compile Include="Models\ProductState.cs" />
+    <Compile Include="Models\REST\API\AuthenticatorAPI.cs" />
+    <Compile Include="Models\REST\API\DeliveryPointAPI.cs" />
+    <Compile Include="Models\REST\API\OrderAPI.cs" />
+    <Compile Include="Models\REST\API\ProductAPI.cs" />
+    <Compile Include="Models\REST\API\ProductDataAPI.cs" />
+    <Compile Include="Models\REST\API\ProductStateAPI.cs" />
+    <Compile Include="Models\REST\API\DeliveryAPI.cs" />
+    <Compile Include="Models\REST\API\FlightAPI.cs" />
+    <Compile Include="Models\REST\API\PackageAPI.cs" />
+    <Compile Include="Models\REST\API\PackageСontentAPI.cs" />
+    <Compile Include="Models\REST\API\PackageStateAPI.cs" />
     <Compile Include="Models\REST\API\WarehouseAPI.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Models\Warehouse.cs" />
+    <Compile Include="Models\Сonverters\DeliveryPointConverter.cs" />
+    <Compile Include="Models\Сonverters\PackageConverter.cs" />
+    <Compile Include="Models\Сonverters\OrderConverter.cs" />
+    <Compile Include="Models\Сonverters\ProductDataConverter.cs" />
+    <Compile Include="Models\Сonverters\ProductConverter.cs" />
+    <Compile Include="Models\Сonverters\FlightConverter.cs" />
     <Compile Include="Models\Сonverters\WarehouseConverter.cs" />
     <Compile Include="Models\Сonverters\VehicleConverter.cs" />
     <Compile Include="Models\Navigator.cs" />
@@ -163,10 +193,22 @@
     <Compile Include="Models\Vehicle.cs" />
     <Compile Include="ViewModels\Pages\CreateViewModel.cs" />
     <Compile Include="ViewModels\Pages\EditViewModel.cs" />
+    <Compile Include="ViewModels\Pages\DeliveryPointManagementViewModel.cs" />
+    <Compile Include="ViewModels\Pages\PackageManagementViewModel.cs" />
+    <Compile Include="ViewModels\Pages\OrderManagementViewModel.cs" />
+    <Compile Include="ViewModels\Pages\ProductDataManagementViewModel.cs" />
+    <Compile Include="ViewModels\Pages\ProductManagementViewModel.cs" />
+    <Compile Include="ViewModels\Pages\FlightManagementViewModel.cs" />
     <Compile Include="ViewModels\Pages\WarehouseManagementViewModel.cs" />
     <Compile Include="ViewModels\UserControls\BaseFieldViewModel.cs" />
     <Compile Include="ViewModels\UserControls\ComboBoxValidationViewModel.cs" />
     <Compile Include="ViewModels\UserControls\TextBoxValidationViewModel.cs" />
+    <Compile Include="ViewModels\DeliveryPointViewModel.cs" />
+    <Compile Include="ViewModels\PackageViewModel.cs" />
+    <Compile Include="ViewModels\OrderViewModel.cs" />
+    <Compile Include="ViewModels\ProductDataViewModel.cs" />
+    <Compile Include="ViewModels\ProductViewModel.cs" />
+    <Compile Include="ViewModels\FlightViewModel.cs" />
     <Compile Include="ViewModels\WarehouseViewModel.cs" />
     <Compile Include="ViewModels\VehicleViewModel.cs" />
     <Compile Include="ViewModels\UserControls\ButtonNavigateViewModel.cs" />
@@ -184,6 +226,24 @@
     </Compile>
     <Compile Include="Views\Pages\Edit.xaml.cs">
       <DependentUpon>Edit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\DeliveryPointManagement.xaml.cs">
+      <DependentUpon>DeliveryPointManagement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\PackageManagement.xaml.cs">
+      <DependentUpon>PackageManagement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\OrderManagement.xaml.cs">
+      <DependentUpon>OrderManagement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\ProductDataManagement.xaml.cs">
+      <DependentUpon>ProductDataManagement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\ProductManagement.xaml.cs">
+      <DependentUpon>ProductManagement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\FlightManagement.xaml.cs">
+      <DependentUpon>FlightManagement.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Pages\WarehouseManagement.xaml.cs">
       <DependentUpon>WarehouseManagement.xaml</DependentUpon>
@@ -247,6 +307,30 @@
     <Page Include="Views\Pages\Edit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\DeliveryPointManagement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Pages\PackageManagement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Pages\OrderManagement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Pages\ProductDataManagement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Pages\ProductManagement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Pages\FlightManagement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Pages\WarehouseManagement.xaml">
       <Generator>MSBuild:Compile</Generator>

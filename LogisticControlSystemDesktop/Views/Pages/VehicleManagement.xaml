@@ -39,7 +39,7 @@
                                 </DataGridCheckBoxColumn.HeaderTemplate>
                             </DataGridCheckBoxColumn>
                             <DataGridTextColumn Header="#" IsReadOnly="True" CanUserResize="False" Width="auto" Binding="{Binding Number}"/>
-                            <DataGridTemplateColumn Header="Владелец" IsReadOnly="True" Width="*">
+                            <DataGridTemplateColumn Header="Владелец" IsReadOnly="True" Width="auto">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <StackPanel Orientation="Horizontal">
