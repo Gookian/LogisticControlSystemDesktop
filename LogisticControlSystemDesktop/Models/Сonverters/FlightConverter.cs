@@ -26,6 +26,7 @@ namespace LogisticControlSystemDesktop.Models.converters
             var result = new FlightViewModel()
             {
                 Number = item.FlightId,
+                FlightNumber = item.Number,
                 VehicleId = item.VehicleId,
                 RegistrationNumber = vehicle.RegistrationNumber,
             };

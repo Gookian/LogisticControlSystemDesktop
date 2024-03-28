@@ -154,6 +154,7 @@
     <Compile Include="Models\Delivery.cs" />
     <Compile Include="Models\DeliveryPoint.cs" />
     <Compile Include="Models\Flight.cs" />
+    <Compile Include="Models\IdTargetValueItem.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\OrderDetail.cs" />
     <Compile Include="Models\Package.cs" />

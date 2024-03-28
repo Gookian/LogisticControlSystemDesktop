@@ -74,7 +74,17 @@ namespace LogisticControlSystemDesktop.ViewModels.Pages
 
                 var viewModel = FindFieldViewModelByName(item.Name);
 
-                viewModel.Value = value.ToString();
+                switch (viewModel.GetType().Name)
+                {
+                    case nameof(ComboBoxValidationViewModel):
+                        viewModel.SetSelected((int)value);
+                        break;
+                    case nameof(TextBoxValidationViewModel):
+                        viewModel.Value = value.ToString();
+                        break;
+                    default:
+                        break;
+                }
             }
         }
 
@@ -100,19 +110,30 @@ namespace LogisticControlSystemDesktop.ViewModels.Pages
                 var viewModel = FindFieldViewModelByName(item.Name);
 
                 var property = _type.GetProperty(item.Name);
-                var propertyType = property.PropertyType;
-                var typeCode = Type.GetTypeCode(propertyType);
 
-                switch (typeCode)
+                switch (viewModel.GetType().Name)
                 {
-                    case TypeCode.Int32:
-                        property.SetValue(instance, Convert.ToInt32(viewModel.Value));
+                    case nameof(ComboBoxValidationViewModel):
+                        property.SetValue(instance, Convert.ToInt32(viewModel.ParametrSelected.Id));
                         break;
-                    case TypeCode.Double:
-                        property.SetValue(instance, Convert.ToDouble(viewModel.Value));
-                        break;
-                    case TypeCode.String:
-                        property.SetValue(instance, viewModel.Value);
+                    case nameof(TextBoxValidationViewModel):
+                        var propertyType = property.PropertyType;
+                        var typeCode = Type.GetTypeCode(propertyType);
+
+                        switch (typeCode)
+                        {
+                            case TypeCode.Int32:
+                                property.SetValue(instance, Convert.ToInt32(viewModel.Value));
+                                break;
+                            case TypeCode.Double:
+                                property.SetValue(instance, Convert.ToDouble(viewModel.Value));
+                                break;
+                            case TypeCode.String:
+                                property.SetValue(instance, viewModel.Value);
+                                break;
+                            default:
+                                break;
+                        }
                         break;
                     default:
                         break;

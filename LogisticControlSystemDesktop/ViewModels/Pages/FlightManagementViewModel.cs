@@ -77,7 +77,7 @@ namespace LogisticControlSystemDesktop.ViewModels.Pages
             Flights = new ObservableCollection<FlightViewModel>();
             Parametrs = new ObservableCollection<Parametr>
             {
-                new Parametr { ID = 1, Text = "#", PropertyName = "Number" },
+                new Parametr { ID = 1, Text = "#", PropertyName = "FlightNumber" },
                 new Parametr { ID = 2, Text = "Транспортное средство", PropertyName = "RegistrationNumber" },
             };
             ParametrSelected = Parametrs[0];

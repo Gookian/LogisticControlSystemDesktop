@@ -43,7 +43,7 @@
                             <DataGridTextColumn Header="Имя" IsReadOnly="True" CanUserResize="False" Width="auto" Binding="{Binding FirstName}"/>
                             <DataGridTextColumn Header="Отчество" IsReadOnly="True" CanUserResize="False" Width="auto" Binding="{Binding Surname}"/>
                             <DataGridTextColumn Header="Адрес" IsReadOnly="True" CanUserResize="False" Width="*" Binding="{Binding Address}"/>
-                            <DataGridTextColumn Header="Дата доставки" IsReadOnly="True" CanUserResize="False" Width="*" Binding="{Binding DeliveryDateTime}"/>
+                            <DataGridTextColumn Header="Дата доставки" IsReadOnly="True" CanUserResize="False" Width="auto" Binding="{Binding DeliveryDateTime}"/>
                             <DataGridTemplateColumn Header="Товары на складе" IsReadOnly="True" Width="*">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>

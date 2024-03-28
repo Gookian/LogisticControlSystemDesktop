@@ -39,10 +39,10 @@
                                 </DataGridCheckBoxColumn.HeaderTemplate>
                             </DataGridCheckBoxColumn>
                             <DataGridTextColumn Header="#" IsReadOnly="True" CanUserResize="False" Width="auto" Binding="{Binding Number}"/>
-                            <DataGridTextColumn Header="Наименование" IsReadOnly="True" CanUserResize="False" Width="*" Binding="{Binding Name}"/>
+                            <DataGridTextColumn Header="Наименование" IsReadOnly="True" CanUserResize="False" Width="auto" Binding="{Binding Name}"/>
                             <DataGridTextColumn Header="Адрес" IsReadOnly="True" CanUserResize="False" Width="*" Binding="{Binding Address}"/>
-                            <DataGridTextColumn Header="Широта" IsReadOnly="True" CanUserResize="False" Width="*" Binding="{Binding Latitude}"/>
-                            <DataGridTextColumn Header="Долгота" IsReadOnly="True" CanUserResize="False" Width="*" Binding="{Binding Longitude}"/>
+                            <DataGridTextColumn Header="Широта" IsReadOnly="True" CanUserResize="False" Width="auto" Binding="{Binding Latitude}"/>
+                            <DataGridTextColumn Header="Долгота" IsReadOnly="True" CanUserResize="False" Width="auto" Binding="{Binding Longitude}"/>
                             <DataGridTemplateColumn Header="Операции" IsReadOnly="True" Width="auto">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
@@ -63,6 +63,7 @@
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
+                            <DataGridTextColumn Header="" IsReadOnly="True" CanUserResize="False" Width="0"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </ScrollViewer>

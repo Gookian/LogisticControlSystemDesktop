@@ -82,6 +82,24 @@ namespace LogisticControlSystemDesktop.Models.REST.API
             }
         }
 
+        public IEnumerable<IdTargetValueItem> GetIdTargetValues()
+        {
+            var httpClient = new HttpClient();
+            var baseUrl = baseApiUrl + ControllerName + $"/IdTargetValue";
+            httpClient.BaseAddress = new Uri(baseUrl);
+
+            var response = httpClient.GetAsync(baseUrl).Result;
+
+            if (!response.IsSuccessStatusCode)
+            {
+                return null;
+            }
+            else
+            {
+                return response.Content.ReadAsAsync<IEnumerable<IdTargetValueItem>>().Result;
+            }
+        }
+
         public object Create(object instance)
         {
             var httpClient = new HttpClient();

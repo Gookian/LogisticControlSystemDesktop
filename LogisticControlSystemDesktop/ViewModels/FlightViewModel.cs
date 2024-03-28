@@ -12,6 +12,7 @@ namespace LogisticControlSystemDesktop.ViewModels
     public class FlightViewModel : BindableBase, INotifyPropertyChanged
     {
         public int Number { get; set; }
+        public string FlightNumber { get; set; }
         public string RegistrationNumber { get; set; }
         public int VehicleId { get; set; }
 
@@ -33,9 +34,11 @@ namespace LogisticControlSystemDesktop.ViewModels
         {
             var flight = (Flight)FlightAPI.Instance.Get(Number);
 
+            FlightNumber = flight.Number;
             RegistrationNumber = flight.Vehicle.RegistrationNumber;
             VehicleId = flight.VehicleId;
 
+            OnPropertyChanged(nameof(FlightNumber));
             OnPropertyChanged(nameof(RegistrationNumber));
             OnPropertyChanged(nameof(VehicleId));
         }

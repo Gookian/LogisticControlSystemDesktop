@@ -3,6 +3,7 @@
     public class Flight
     {
         public int FlightId { get; set; }
+        public string Number { get; set; }
 
         // Внешние ключи
         public int VehicleId { get; set; }
