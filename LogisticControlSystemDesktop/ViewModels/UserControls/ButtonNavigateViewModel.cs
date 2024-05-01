@@ -1,4 +1,5 @@
 ﻿using LogisticControlSystemDesktop.Models;
+using LogisticControlSystemDesktop.Models.Navigators;
 using Prism.Commands;
 using Prism.Mvvm;
 using System;
@@ -49,12 +50,12 @@ namespace LogisticControlSystemDesktop.ViewModels.UserControls
         public void NavigateTo_Click()
         {
             Color = AccentColor;
-            Navigator.Instance.Navigate(_id);
+            ShellNavigator.Instance.Navigate(_id);
         }
 
         public void Close_Click()
         {
-            Navigator.Instance.Close(_id);
+            MainNavigator.Instance.Close(_id);
         }
 
         protected virtual void OnPropertyChanged(string propertyName)

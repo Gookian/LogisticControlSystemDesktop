@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Windows.Media;
 using System.Net.Http;
+using LogisticControlSystemDesktop.Models.Navigators;
 
 namespace LogisticControlSystemDesktop.ViewModels.Pages
 {
@@ -47,23 +48,7 @@ namespace LogisticControlSystemDesktop.ViewModels.Pages
 
             CreateClick = new DelegateCommand(Create_Click);
 
-            SubscribeOnCreated();
             LoadStructure(baseEntityAPI);
-        }
-
-        private void SubscribeOnCreated()
-        {
-            var navigateItems = Navigator.Instance.GetAllNavigateItem();
-
-            foreach (var navigateItem in navigateItems)
-            {
-                if (navigateItem.Screen.DataContext.GetType().Name == $"{_type.Name}ManagementViewModel")
-                {
-                    var type = navigateItem.Screen.DataContext.GetType();
-                    MethodInfo method = type.GetMethod("SignOnCreated", new Type[] { typeof(CreateViewModel) });
-                    method.Invoke(navigateItem.Screen.DataContext, new object[] { this });
-                }
-            }
         }
 
         private void LoadStructure(BaseEntityAPI api)
@@ -135,7 +120,7 @@ namespace LogisticControlSystemDesktop.ViewModels.Pages
             if (result != null)
             {
                 OnCreated?.Invoke(result);
-                Navigator.Instance.Close(_view);
+                MainNavigator.Instance.Close(_view);
             }
             else
             {

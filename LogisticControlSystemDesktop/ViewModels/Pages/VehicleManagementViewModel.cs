@@ -1,7 +1,9 @@
 ﻿using LogisticControlSystemDesktop.Models;
 using LogisticControlSystemDesktop.Models.converters;
+using LogisticControlSystemDesktop.Models.Hubs;
 using LogisticControlSystemDesktop.REST.API;
 using Prism.Mvvm;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -69,6 +71,7 @@ namespace LogisticControlSystemDesktop.ViewModels.Pages
 
         private ICollectionView _myData;
 
+        private VehicleNotificationHab _hub = new VehicleNotificationHab();
         private VehicleConverter _converter = new VehicleConverter();
         private CollectionViewSource _itemSourceList;
         private DataGrid _grid;
@@ -89,41 +92,71 @@ namespace LogisticControlSystemDesktop.ViewModels.Pages
             Parametrs.Add(new Parametr { ID = 2, Text = "Грузоподъемность", PropertyName = "LoadCapacity" });
             ParametrSelected = Parametrs[0];
 
-            UpdateVehicles();
+            _hub.OnReceivedNotification += hub_OnReceivedNotification;
+
+            _hub.ConnectAsync();
+
+            Load();
         }
 
-        public void SignOnCreated(CreateViewModel viewModel)
+        private void hub_OnReceivedNotification(Vehicle entity, UpdateType type)
         {
-            viewModel.OnCreated += ViewModel_OnCreated;
-        }
-
-        private void ViewModel_OnCreated(object item)
-        {
-            var element = (Vehicle)item;
-            _vihecles.Add(_converter.Convert(element));
-        }
-
-        private void VehicleData_VehicleDeleted(int id)
-        {
-            var vihecleViewModel = _vihecles.FirstOrDefault(x => x.Number == id);
-
-            if (vihecleViewModel != null)
+            switch (type)
             {
-                _vihecles.Remove(vihecleViewModel);
+                case UpdateType.Add:
+                    Create(entity);
+                    break;
+                case UpdateType.Uppdate:
+                    Update(entity);
+                    break;
+                case UpdateType.Delete:
+                    Delete(entity);
+                    break;
             }
         }
 
-        private void UpdateVehicles()
+        private void Create(Vehicle entity)
+        {
+            var viewModel = _converter.Convert(entity);
+            viewModel.BgColor.Freeze();
+
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                _vihecles.Add(viewModel);
+            });
+        }
+
+        private void Update(Vehicle entity)
+        {
+            var viewModel = _converter.Convert(entity);
+            var item = _vihecles.FirstOrDefault(x => x.Number == viewModel.Number);
+            viewModel.BgColor.Freeze();
+            //item.BgColor.Freeze();
+
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                int index = _vihecles.IndexOf(item);
+                _vihecles[index] = viewModel;
+            });
+        }
+
+        private void Delete(Vehicle entity)
+        {
+            var viewModel = _converter.Convert(entity);
+            var item = _vihecles.FirstOrDefault(x => x.Number == viewModel.Number);
+
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                _vihecles.Remove(item);
+            });
+        }
+
+        private void Load()
         {
             _vihecles.Clear();
 
             var vehicles = VehicleAPI.Instance.GetAll() as IEnumerable<Vehicle>;
             var vehicleDatas = _converter.Convert(vehicles);
-
-            foreach (var vehicleData in vehicleDatas)
-            {
-                vehicleData.VehicleDeleted += VehicleData_VehicleDeleted;
-            }
 
             _vihecles.AddRange(vehicleDatas);
         }

@@ -2,13 +2,10 @@
 using System.Net.Http.Headers;
 using System.Net.Http;
 using System;
-using System.Windows.Media.Animation;
 using System.Reflection;
-using System.Threading.Tasks;
-using GMap.NET.MapProviders;
 using System.Text;
 using Newtonsoft.Json;
-using System.Collections;
+using System.Windows;
 
 namespace LogisticControlSystemDesktop.Models.REST.API
 {
@@ -17,7 +14,7 @@ namespace LogisticControlSystemDesktop.Models.REST.API
         protected virtual string ControllerName { get; set; }
         protected virtual Type TypeObject { get; set; } = typeof(object);
 
-        protected string baseApiUrl = "https://localhost:7224/api/";
+        protected string baseApiUrl = "http://192.168.1.6:5115/api/";//"https://localhost:7141/api/";
 
         protected BaseEntityAPI() 
         {
@@ -28,6 +25,8 @@ namespace LogisticControlSystemDesktop.Models.REST.API
             var httpClient = new HttpClient();
             var baseUrl = baseApiUrl + ControllerName;
             httpClient.BaseAddress = new Uri(baseUrl);
+            httpClient.DefaultRequestHeaders.Authorization =
+                new AuthenticationHeaderValue(AuthenticationAPI.Instance.Token);
 
             var response = httpClient.GetAsync(baseUrl).Result;
 
@@ -49,6 +48,8 @@ namespace LogisticControlSystemDesktop.Models.REST.API
             var httpClient = new HttpClient();
             var baseUrl = baseApiUrl + ControllerName + $"/{id}";
             httpClient.BaseAddress = new Uri(baseUrl);
+            httpClient.DefaultRequestHeaders.Authorization =
+                new AuthenticationHeaderValue(AuthenticationAPI.Instance.Token);
 
             var response = httpClient.GetAsync(baseUrl).Result;
 
@@ -69,6 +70,8 @@ namespace LogisticControlSystemDesktop.Models.REST.API
             var httpClient = new HttpClient();
             var baseUrl = baseApiUrl + ControllerName + $"/Structure";
             httpClient.BaseAddress = new Uri(baseUrl);
+            httpClient.DefaultRequestHeaders.Authorization =
+                new AuthenticationHeaderValue(AuthenticationAPI.Instance.Token);
 
             var response = httpClient.GetAsync(baseUrl).Result;
 
@@ -87,6 +90,8 @@ namespace LogisticControlSystemDesktop.Models.REST.API
             var httpClient = new HttpClient();
             var baseUrl = baseApiUrl + ControllerName + $"/IdTargetValue";
             httpClient.BaseAddress = new Uri(baseUrl);
+            httpClient.DefaultRequestHeaders.Authorization =
+                new AuthenticationHeaderValue(AuthenticationAPI.Instance.Token);
 
             var response = httpClient.GetAsync(baseUrl).Result;
 
@@ -105,6 +110,8 @@ namespace LogisticControlSystemDesktop.Models.REST.API
             var httpClient = new HttpClient();
             var baseUrl = baseApiUrl + ControllerName;
             httpClient.BaseAddress = new Uri(baseUrl);
+            httpClient.DefaultRequestHeaders.Authorization =
+                new AuthenticationHeaderValue(AuthenticationAPI.Instance.Token);
 
             string jsonData = JsonConvert.SerializeObject(instance);
             StringContent content = new StringContent(jsonData, Encoding.UTF8, "application/json");
@@ -123,11 +130,13 @@ namespace LogisticControlSystemDesktop.Models.REST.API
             }
         }
 
-        public object Edit(object instance)
+        public object Edit(int id, object instance)
         {
             var httpClient = new HttpClient();
-            var baseUrl = baseApiUrl + ControllerName;
+            var baseUrl = baseApiUrl + ControllerName + $"/{id}";
             httpClient.BaseAddress = new Uri(baseUrl);
+            httpClient.DefaultRequestHeaders.Authorization =
+                 new AuthenticationHeaderValue(AuthenticationAPI.Instance.Token);
 
             string jsonData = JsonConvert.SerializeObject(instance);
             StringContent content = new StringContent(jsonData, Encoding.UTF8, "application/json");
@@ -151,6 +160,8 @@ namespace LogisticControlSystemDesktop.Models.REST.API
             var httpClient = new HttpClient();
             var baseUrl = baseApiUrl + ControllerName + $"/{id}";
             httpClient.BaseAddress = new Uri(baseUrl);
+            httpClient.DefaultRequestHeaders.Authorization =
+                new AuthenticationHeaderValue(AuthenticationAPI.Instance.Token);
 
             var response = httpClient.DeleteAsync(baseUrl).Result;
 

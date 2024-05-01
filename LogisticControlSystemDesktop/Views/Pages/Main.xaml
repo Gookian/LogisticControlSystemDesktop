@@ -1,0 +1,141 @@
+﻿<UserControl x:Class="LogisticControlSystemDesktop.Views.Pages.Main"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:LogisticControlSystemDesktop.Views.Pages"
+             xmlns:prism="http://prismlibrary.com/"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             prism:ViewModelLocator.AutoWireViewModel="True">
+    <Grid>
+        <Grid Background="#FFF">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Menu Grid.Row="0" Height="25" VerticalAlignment="Top" Background="#FF5E69EE" Foreground="#FFF4F4FB" FontSize="14">
+                <MenuItem Header="Меню">
+                    <MenuItem Header="Настройки" Foreground="#5e69ee">
+                        <MenuItem.InputBindings>
+                            <MouseBinding MouseAction="LeftClick" Command="{Binding Open}" CommandParameter="Пустая страница" />
+                        </MenuItem.InputBindings>
+                    </MenuItem>
+                    <MenuItem Header="Выход" Foreground="#5e69ee"/>
+                </MenuItem>
+                <MenuItem Header="Главная">
+                    <MenuItem.InputBindings>
+                        <MouseBinding MouseAction="LeftClick" Command="{Binding Open}" CommandParameter="Главная" />
+                    </MenuItem.InputBindings>
+                </MenuItem>
+                <MenuItem Header="Статистика">
+                    <MenuItem Header="Графики" Foreground="#5e69ee">
+                        <MenuItem.InputBindings>
+                            <MouseBinding MouseAction="LeftClick" Command="{Binding Open}" CommandParameter="Пустая страница" />
+                        </MenuItem.InputBindings>
+                    </MenuItem>
+                    <MenuItem Header="Гистаграммы" Foreground="#5e69ee">
+                        <MenuItem.InputBindings>
+                            <MouseBinding MouseAction="LeftClick" Command="{Binding Open}" CommandParameter="Пустая страница" />
+                        </MenuItem.InputBindings>
+                    </MenuItem>
+                </MenuItem>
+                <MenuItem Header="Управление">
+                    <MenuItem Header="Маршрутами" Foreground="#5e69ee">
+                        <MenuItem.InputBindings>
+                            <MouseBinding MouseAction="LeftClick" Command="{Binding Open}" CommandParameter="Управление маршрутами" />
+                        </MenuItem.InputBindings>
+                    </MenuItem>
+                    <MenuItem Header="Складами" Foreground="#5e69ee">
+                        <MenuItem.InputBindings>
+                            <MouseBinding MouseAction="LeftClick" Command="{Binding Open}" CommandParameter="Управление складами" />
+                        </MenuItem.InputBindings>
+                    </MenuItem>
+                    <MenuItem Header="Транспортными средствами" Foreground="#5e69ee">
+                        <MenuItem.InputBindings>
+                            <MouseBinding MouseAction="LeftClick" Command="{Binding Open}" CommandParameter="Управление транспортными средствами" />
+                        </MenuItem.InputBindings>
+                    </MenuItem>
+                    <MenuItem Header="Товарами" Foreground="#5e69ee">
+                        <MenuItem.InputBindings>
+                            <MouseBinding MouseAction="LeftClick" Command="{Binding Open}" CommandParameter="Управление товарами" />
+                        </MenuItem.InputBindings>
+                    </MenuItem>
+                    <MenuItem Header="Данными о товарах" Foreground="#5e69ee">
+                        <MenuItem.InputBindings>
+                            <MouseBinding MouseAction="LeftClick" Command="{Binding Open}" CommandParameter="Управление данными товаров" />
+                        </MenuItem.InputBindings>
+                    </MenuItem>
+                    <MenuItem Header="Заказами" Foreground="#5e69ee">
+                        <MenuItem.InputBindings>
+                            <MouseBinding MouseAction="LeftClick" Command="{Binding Open}" CommandParameter="Управление заказами" />
+                        </MenuItem.InputBindings>
+                    </MenuItem>
+                    <MenuItem Header="Посылками" Foreground="#5e69ee">
+                        <MenuItem.InputBindings>
+                            <MouseBinding MouseAction="LeftClick" Command="{Binding Open}" CommandParameter="Управление посылками" />
+                        </MenuItem.InputBindings>
+                    </MenuItem>
+                    <MenuItem Header="Точками доставки" Foreground="#5e69ee">
+                        <MenuItem.InputBindings>
+                            <MouseBinding MouseAction="LeftClick" Command="{Binding Open}" CommandParameter="Управление точками доставки" />
+                        </MenuItem.InputBindings>
+                    </MenuItem>
+                </MenuItem>
+                <MenuItem Header="Создать">
+                    <MenuItem Header="Точку доставки" Foreground="#5e69ee">
+                        <MenuItem.InputBindings>
+                            <MouseBinding MouseAction="LeftClick" Command="{Binding Open}" CommandParameter="DeliveryPoint" />
+                        </MenuItem.InputBindings>
+                    </MenuItem>
+                    <MenuItem Header="Товар" Foreground="#5e69ee">
+                        <MenuItem.InputBindings>
+                            <MouseBinding MouseAction="LeftClick" Command="{Binding Open}" CommandParameter="Product" />
+                        </MenuItem.InputBindings>
+                    </MenuItem>
+                    <MenuItem Header="Дынные о товаре" Foreground="#5e69ee">
+                        <MenuItem.InputBindings>
+                            <MouseBinding MouseAction="LeftClick" Command="{Binding Open}" CommandParameter="ProductData" />
+                        </MenuItem.InputBindings>
+                    </MenuItem>
+                    <MenuItem Header="Транспортное средство" Foreground="#5e69ee">
+                        <MenuItem.InputBindings>
+                            <MouseBinding MouseAction="LeftClick" Command="{Binding Open}" CommandParameter="Vehicle" />
+                        </MenuItem.InputBindings>
+                    </MenuItem>
+                    <MenuItem Header="Склад" Foreground="#5e69ee">
+                        <MenuItem.InputBindings>
+                            <MouseBinding MouseAction="LeftClick" Command="{Binding Open}" CommandParameter="Warehouse" />
+                        </MenuItem.InputBindings>
+                    </MenuItem>
+                    <MenuItem Header="Заказ" Foreground="#5e69ee">
+                        <MenuItem.InputBindings>
+                            <MouseBinding MouseAction="LeftClick" Command="{Binding Open}" CommandParameter="Order" />
+                        </MenuItem.InputBindings>
+                    </MenuItem>
+                </MenuItem>
+                <MenuItem Header="Вид">
+                    <MenuItem Header="Темы" Foreground="#5e69ee">
+                        <MenuItem.InputBindings>
+                            <MouseBinding MouseAction="LeftClick" Command="{Binding Open}" CommandParameter="Пустая страница" />
+                        </MenuItem.InputBindings>
+                    </MenuItem>
+                </MenuItem>
+            </Menu>
+            <Border Grid.Row="1" Background="#FFF4F4FB" CornerRadius="10" Margin="10 10 10 5" Padding="10 10 10 5">
+                <Border.Effect>
+                    <DropShadowEffect ShadowDepth="0" Opacity="0.5" BlurRadius="10" Color="#5e69ee"/>
+                </Border.Effect>
+                <ScrollViewer Margin="0 0 0 0" Style="{DynamicResource CustomScrollViewerStyle}" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                    <StackPanel x:Name="navigatePanel" Orientation="Horizontal" Margin="0 0 0 5" >
+
+                    </StackPanel>
+                </ScrollViewer>
+            </Border>
+            <Border Grid.Row="2" x:Name="border">
+
+            </Border>
+        </Grid>
+    </Grid>
+</UserControl>

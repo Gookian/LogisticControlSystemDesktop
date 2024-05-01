@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Windows;
 using System.Windows.Controls;
 
-namespace LogisticControlSystemDesktop.Models
+namespace LogisticControlSystemDesktop.Models.Navigators
 {
-    public class Navigator
+    public abstract class Navigator
     {
         public static Navigator Instance { get; set; }
 

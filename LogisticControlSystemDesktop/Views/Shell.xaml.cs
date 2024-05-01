@@ -15,7 +15,7 @@ namespace LogisticControlSystemDesktop.Views
         {
             InitializeComponent();
 
-            ShellViewModel viewModel = new ShellViewModel(border, navigatePanel);
+            ShellViewModel viewModel = new ShellViewModel(mainPanel);
             DataContext = viewModel;
         }
     }

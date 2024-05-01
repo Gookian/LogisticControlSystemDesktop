@@ -63,7 +63,6 @@
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
-                            <DataGridTextColumn Header="" IsReadOnly="True" CanUserResize="False" Width="0"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </ScrollViewer>

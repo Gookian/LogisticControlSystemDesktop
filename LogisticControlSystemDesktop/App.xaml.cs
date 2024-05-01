@@ -1,4 +1,5 @@
-﻿using LogisticControlSystemDesktop.REST.API;
+﻿using LogisticControlSystemDesktop.Models.REST.API;
+using LogisticControlSystemDesktop.REST.API;
 using LogisticControlSystemDesktop.Views;
 using Prism.Ioc;
 using Prism.Modularity;
@@ -20,6 +21,7 @@ namespace LogisticControlSystemDesktop
     {
         public App()
         {
+            new AuthenticationAPI();
             new VehicleAPI();
             new WarehouseAPI();
             new FlightAPI();

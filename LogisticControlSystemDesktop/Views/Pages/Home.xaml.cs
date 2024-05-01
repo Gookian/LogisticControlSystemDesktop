@@ -9,6 +9,10 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Timers;
+using System;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace LogisticControlSystemDesktop.Views.Pages
 {
@@ -17,6 +21,8 @@ namespace LogisticControlSystemDesktop.Views.Pages
     /// </summary>
     public partial class Home : UserControl
     {
+        public GMapMarker marker;
+
         public Home()
         {
             InitializeComponent();
@@ -24,6 +30,14 @@ namespace LogisticControlSystemDesktop.Views.Pages
             DataContext = new HomeViewModel();
 
             var converter = new BrushConverter();
+
+            marker = SetMarker(new PointLatLng(56.4641294015001, 84.950789809227), new PackIconMaterial
+            {
+                Kind = PackIconMaterialKind.TruckDelivery,
+                Width = 30,
+                Height = 30,
+                Foreground = (Brush)converter.ConvertFromString("#000")
+            });
 
             SetMarker(new PointLatLng(56.4641294015001, 84.950789809227), new PackIconMaterial
             {
@@ -133,6 +147,18 @@ namespace LogisticControlSystemDesktop.Views.Pages
             mapControl.Position = new PointLatLng(32.064, 118.704); //Центральное расположение карты: Нанкин.
             */
             mapControl.MouseRightButtonDown += new MouseButtonEventHandler(mapControl_MouseLeftButtonDown);
+
+            Move();
+        }
+
+        public void Move()
+        {
+            for (int i = 0; i <= 20; i++)
+            {//56.4641294015001, 84.950789809227
+                var lat = marker.Position.Lat + 0.00001;//0.0000000000001;
+                var lng = marker.Position.Lng + 0.00001;
+                marker.Position = new PointLatLng(lat, lng);
+            }
         }
 
         void mapControl_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -153,15 +179,19 @@ namespace LogisticControlSystemDesktop.Views.Pages
             marker.Offset = new Point(-icon.Width / 2, -icon.Height / 2);
 
             mapControl.Markers.Add(marker);
+
+            Move();
         }
 
-        private void SetMarker(PointLatLng point, PackIconMaterial icon)
+        private GMapMarker SetMarker(PointLatLng point, PackIconMaterial icon)
         {
             GMapMarker marker = new GMapMarker(point);
             marker.Shape = icon;
             marker.Offset = new Point(-icon.Width / 2, -icon.Height / 2);
 
             mapControl.Markers.Add(marker);
+
+            return marker;
         }
     }
 

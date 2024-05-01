@@ -1,4 +1,5 @@
 ﻿using LogisticControlSystemDesktop.Models;
+using LogisticControlSystemDesktop.Models.Navigators;
 using LogisticControlSystemDesktop.REST.API;
 using LogisticControlSystemDesktop.ViewModels.Pages;
 using LogisticControlSystemDesktop.Views.Pages;
@@ -62,7 +63,7 @@ namespace LogisticControlSystemDesktop.ViewModels
 
             viewModel.OnSaved += ViewModel_OnSaved;
 
-            Navigator.Instance.Open(view, "Редактирование склада");
+            MainNavigator.Instance.Open(view, "Редактирование склада");
         }
 
         private void OnPropertyChanged(string propName)

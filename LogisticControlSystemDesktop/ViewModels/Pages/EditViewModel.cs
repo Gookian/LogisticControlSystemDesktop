@@ -9,6 +9,7 @@ using System.Linq;
 using LogisticControlSystemDesktop.ViewModels.UserControls;
 using System.Windows;
 using System.Collections.Generic;
+using LogisticControlSystemDesktop.Models.Navigators;
 
 namespace LogisticControlSystemDesktop.ViewModels.Pages
 {
@@ -140,12 +141,12 @@ namespace LogisticControlSystemDesktop.ViewModels.Pages
                 }
             }
 
-            var result = _baseEntityAPI1.Edit(instance);
+            var result = _baseEntityAPI1.Edit(_id, instance);
 
             if (result != null)
             {
                 OnSaved?.Invoke();
-                Navigator.Instance.Close(_view);
+                MainNavigator.Instance.Close(_view);
             }
             else
             {
