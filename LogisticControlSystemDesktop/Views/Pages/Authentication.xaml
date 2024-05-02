@@ -8,7 +8,7 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="../../delivery-truck.jpg" TileMode="Tile" Opacity="0.4 " Stretch="Uniform" AlignmentY="Top" Viewport="0,0,250,250" ViewportUnits="Absolute" />
+            <ImageBrush ImageSource="../../Assets/Images/delivery-truck.jpg" TileMode="Tile" Opacity="0.4 " Stretch="Uniform" AlignmentY="Top" Viewport="0,0,250,250" ViewportUnits="Absolute" />
         </Grid.Background>
         <Border Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Width="400" Height="400" Background="#FFF4F4FB" CornerRadius="10" Padding="20">
             <Border.Effect>
