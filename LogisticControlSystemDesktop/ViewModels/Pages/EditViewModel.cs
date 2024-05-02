@@ -21,11 +21,8 @@ namespace LogisticControlSystemDesktop.ViewModels.Pages
 
         public DelegateCommand SaveClick { get; set; }
 
-        public delegate void SavedHandler();
-        public event SavedHandler OnSaved;
-
         private List<StructureItem> _structureItems;
-        private BaseEntityAPI _baseEntityAPI1;
+        private BaseEntityAPI _baseEntityAPI;
         private UserControl _view;
         private Type _type;
         private int _id;
@@ -33,7 +30,7 @@ namespace LogisticControlSystemDesktop.ViewModels.Pages
         public EditViewModel(UserControl view, int id, string screanName, BaseEntityAPI baseEntityAPI, Type typeItem)
         {
             _view = view;
-            _baseEntityAPI1 = baseEntityAPI;
+            _baseEntityAPI = baseEntityAPI;
             _type = typeItem;
             _id = id;
 
@@ -141,11 +138,10 @@ namespace LogisticControlSystemDesktop.ViewModels.Pages
                 }
             }
 
-            var result = _baseEntityAPI1.Edit(_id, instance);
+            var result = _baseEntityAPI.Edit(_id, instance);
 
             if (result != null)
             {
-                OnSaved?.Invoke();
                 MainNavigator.Instance.Close(_view);
             }
             else

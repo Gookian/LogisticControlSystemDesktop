@@ -9,10 +9,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Timers;
-using System;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace LogisticControlSystemDesktop.Views.Pages
 {

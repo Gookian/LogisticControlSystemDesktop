@@ -1,16 +1,6 @@
-﻿using LogisticControlSystemDesktop.Models;
-using LogisticControlSystemDesktop.Models.Navigators;
-using LogisticControlSystemDesktop.Models.REST.API;
-using LogisticControlSystemDesktop.ViewModels.Pages;
-using LogisticControlSystemDesktop.ViewModels.UserControls;
+﻿using LogisticControlSystemDesktop.Models.Navigators;
 using LogisticControlSystemDesktop.Views.Pages;
-using LogisticControlSystemDesktop.Views.UserControls;
-using Prism.Commands;
 using Prism.Mvvm;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
 using System.Windows.Controls;
 
 namespace LogisticControlSystemDesktop.ViewModels
@@ -21,7 +11,7 @@ namespace LogisticControlSystemDesktop.ViewModels
 
         public ShellViewModel(Border mainPanel)
         {
-            ShellNavigator navigator = new ShellNavigator(mainPanel, new Authentication());
+            ShellNavigator navigator = new ShellNavigator(mainPanel);
 
             navigator.Open(new Authentication(), "Авторизация");
         }

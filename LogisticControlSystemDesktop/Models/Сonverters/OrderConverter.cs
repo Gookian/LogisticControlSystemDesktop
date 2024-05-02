@@ -1,5 +1,4 @@
-﻿using GMap.NET.MapProviders;
-using LogisticControlSystemDesktop.ViewModels;
+﻿using LogisticControlSystemDesktop.ViewModels;
 using System.Collections.Generic;
 
 namespace LogisticControlSystemDesktop.Models.converters

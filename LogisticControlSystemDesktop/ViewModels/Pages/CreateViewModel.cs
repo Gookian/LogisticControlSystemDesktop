@@ -11,9 +11,6 @@ using System.Windows;
 using Prism.Mvvm;
 using System.ComponentModel;
 using System.Collections.Generic;
-using System.Reflection;
-using System.Windows.Media;
-using System.Net.Http;
 using LogisticControlSystemDesktop.Models.Navigators;
 
 namespace LogisticControlSystemDesktop.ViewModels.Pages
@@ -26,20 +23,17 @@ namespace LogisticControlSystemDesktop.ViewModels.Pages
 
         public DelegateCommand CreateClick { get; set; }
 
-        public delegate void CreateHandler(object item);
-        public event CreateHandler OnCreated;
-
         public event PropertyChangedEventHandler PropertyChanged;
 
         private List<StructureItem> _structureItems;
-        private BaseEntityAPI _baseEntityAPI1;
+        private BaseEntityAPI _baseEntityAPI;
         private UserControl _view;
         private Type _type;
 
         public CreateViewModel(UserControl view, string screanName, BaseEntityAPI baseEntityAPI, Type typeItem)
         {
             _view = view;
-            _baseEntityAPI1 = baseEntityAPI;
+            _baseEntityAPI = baseEntityAPI;
             _type = typeItem;
 
             ScreenName = screanName;
@@ -115,11 +109,10 @@ namespace LogisticControlSystemDesktop.ViewModels.Pages
                 }
             }
 
-            var result = _baseEntityAPI1.Create(instance);
+            var result = _baseEntityAPI.Create(instance);
 
             if (result != null)
             {
-                OnCreated?.Invoke(result);
                 MainNavigator.Instance.Close(_view);
             }
             else

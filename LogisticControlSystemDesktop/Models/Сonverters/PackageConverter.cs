@@ -1,5 +1,4 @@
 ﻿using LogisticControlSystemDesktop.ViewModels;
-using System;
 using System.Collections.Generic;
 
 namespace LogisticControlSystemDesktop.Models.converters

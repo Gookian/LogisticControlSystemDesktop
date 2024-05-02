@@ -20,12 +20,10 @@ namespace LogisticControlSystemDesktop.Models.Navigators
 
         private List<NavigateItem> _screens = new List<NavigateItem>();
         private Decorator _target;
-        private UserControl _default;
 
-        public Navigator(Decorator target, UserControl defaultScreen)
+        public Navigator(Decorator target)
         {
             _target = target;
-            _default = defaultScreen;
 
             if (Instance != this)
             {

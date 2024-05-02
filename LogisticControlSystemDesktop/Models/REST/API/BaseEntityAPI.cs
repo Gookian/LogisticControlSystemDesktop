@@ -5,7 +5,6 @@ using System;
 using System.Reflection;
 using System.Text;
 using Newtonsoft.Json;
-using System.Windows;
 
 namespace LogisticControlSystemDesktop.Models.REST.API
 {
@@ -14,7 +13,7 @@ namespace LogisticControlSystemDesktop.Models.REST.API
         protected virtual string ControllerName { get; set; }
         protected virtual Type TypeObject { get; set; } = typeof(object);
 
-        protected string baseApiUrl = "http://192.168.1.6:5115/api/";//"https://localhost:7141/api/";
+        protected string baseApiUrl = "http://79.136.223.154:5115/api/";//"https://localhost:7141/api/";
 
         protected BaseEntityAPI() 
         {

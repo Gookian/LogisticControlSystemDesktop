@@ -1,5 +1,4 @@
-﻿using LogisticControlSystemDesktop.Models;
-using LogisticControlSystemDesktop.Models.Navigators;
+﻿using LogisticControlSystemDesktop.Models.Navigators;
 using LogisticControlSystemDesktop.Models.REST.API;
 using LogisticControlSystemDesktop.ViewModels.UserControls;
 using LogisticControlSystemDesktop.Views.Pages;
@@ -31,7 +30,7 @@ namespace LogisticControlSystemDesktop.ViewModels
 
             Open = new DelegateCommand<string>(Open_Click);
 
-            MainNavigator navigator = new MainNavigator(border, new Home());
+            MainNavigator navigator = new MainNavigator(border);
             navigator.OnOpen += Navigator_OnOpen;
             navigator.OnNavigate += Navigator_OnNavigate;
             navigator.OnClose += Navigator_OnClose;

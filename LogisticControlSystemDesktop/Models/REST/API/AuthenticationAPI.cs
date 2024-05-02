@@ -11,7 +11,7 @@ namespace LogisticControlSystemDesktop.Models.REST.API
 
         private string _controllerName = "Authentication";
 
-        private string _baseApiUrl = "http://192.168.1.6:5115/api/";//"https://localhost:7141/api/";
+        private string _baseApiUrl = "http://79.136.223.154:5115/api/";//"https://localhost:7141/api/";
 
         public AuthenticationAPI() : base()
         {

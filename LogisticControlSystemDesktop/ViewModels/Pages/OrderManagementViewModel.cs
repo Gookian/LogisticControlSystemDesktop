@@ -1,12 +1,13 @@
 ﻿using LogisticControlSystemDesktop.Models;
 using LogisticControlSystemDesktop.Models.converters;
+using LogisticControlSystemDesktop.Models.Hubs;
 using LogisticControlSystemDesktop.REST.API;
 using Prism.Mvvm;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 
@@ -67,6 +68,7 @@ namespace LogisticControlSystemDesktop.ViewModels.Pages
 
         private ICollectionView _myData;
 
+        private OrderNotificationHub _hub = new OrderNotificationHub();
         private OrderConverter _converter = new OrderConverter();
         private CollectionViewSource _itemSourceList;
         private DataGrid _grid;
@@ -87,41 +89,67 @@ namespace LogisticControlSystemDesktop.ViewModels.Pages
             };
             ParametrSelected = Parametrs[0];
 
-            UpdateVehicles();
+            _hub.OnReceivedNotification += hub_OnReceivedNotification;
+            _hub.ConnectAsync();
+
+            Load();
         }
 
-        public void SignOnCreated(CreateViewModel viewModel)
+        private void hub_OnReceivedNotification(Order entity, UpdateType type)
         {
-            viewModel.OnCreated += ViewModel_OnCreated;
-        }
-
-        private void ViewModel_OnCreated(object item)
-        {
-            var element = (Order)item;
-            _orders.Add(_converter.Convert(element));
-        }
-
-        private void ViewModel_OnDeleted(int id)
-        {
-            var viewModel = _orders.FirstOrDefault(x => x.Number == id);
-
-            if (viewModel != null)
+            switch (type)
             {
-                _orders.Remove(viewModel);
+                case UpdateType.Add:
+                    Create(entity);
+                    break;
+                case UpdateType.Uppdate:
+                    Update(entity);
+                    break;
+                case UpdateType.Delete:
+                    Delete(entity);
+                    break;
             }
         }
 
-        private void UpdateVehicles()
+        private void Create(Order entity)
+        {
+            var viewModel = _converter.Convert(entity);
+
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                _orders.Add(viewModel);
+            });
+        }
+
+        private void Update(Order entity)
+        {
+            var viewModel = _converter.Convert(entity);
+            var item = _orders.FirstOrDefault(x => x.Number == viewModel.Number);
+
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                int index = _orders.IndexOf(item);
+                _orders[index] = viewModel;
+            });
+        }
+
+        private void Delete(Order entity)
+        {
+            var viewModel = _converter.Convert(entity);
+            var item = _orders.FirstOrDefault(x => x.Number == viewModel.Number);
+
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                _orders.Remove(item);
+            });
+        }
+
+        private void Load()
         {
             _orders.Clear();
 
             var orders = OrderAPI.Instance.GetAll() as IEnumerable<Order>;
             var viewModels = _converter.Convert(orders);
-
-            foreach (var viewModel in viewModels)
-            {
-                viewModel.OnDeleted += ViewModel_OnDeleted;
-            }
 
             _orders.AddRange(viewModels);
         }

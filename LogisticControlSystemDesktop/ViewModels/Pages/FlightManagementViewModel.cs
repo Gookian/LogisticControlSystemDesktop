@@ -1,11 +1,13 @@
 ﻿using LogisticControlSystemDesktop.Models;
 using LogisticControlSystemDesktop.Models.converters;
+using LogisticControlSystemDesktop.Models.Hubs;
 using LogisticControlSystemDesktop.REST.API;
 using Prism.Mvvm;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 
@@ -66,6 +68,7 @@ namespace LogisticControlSystemDesktop.ViewModels.Pages
 
         private ICollectionView _myData;
 
+        private FlightNotificationHub _hub = new FlightNotificationHub();
         private FlightConverter _converter = new FlightConverter();
         private CollectionViewSource _itemSourceList;
         private DataGrid _grid;
@@ -82,41 +85,67 @@ namespace LogisticControlSystemDesktop.ViewModels.Pages
             };
             ParametrSelected = Parametrs[0];
 
-            UpdateVehicles();
+            _hub.OnReceivedNotification += hub_OnReceivedNotification;
+            _hub.ConnectAsync();
+
+            Load();
         }
 
-        public void SignOnCreated(CreateViewModel viewModel)
+        private void hub_OnReceivedNotification(Flight entity, UpdateType type)
         {
-            viewModel.OnCreated += ViewModel_OnCreated;
-        }
-
-        private void ViewModel_OnCreated(object item)
-        {
-            var element = (Flight)item;
-            _flights.Add(_converter.Convert(element));
-        }
-
-        private void ViewModel_OnDeleted(int id)
-        {
-            var viewModel = _flights.FirstOrDefault(x => x.Number == id);
-
-            if (viewModel != null)
+            switch (type)
             {
-                _flights.Remove(viewModel);
+                case UpdateType.Add:
+                    Create(entity);
+                    break;
+                case UpdateType.Uppdate:
+                    Update(entity);
+                    break;
+                case UpdateType.Delete:
+                    Delete(entity);
+                    break;
             }
         }
 
-        private void UpdateVehicles()
+        private void Create(Flight entity)
+        {
+            var viewModel = _converter.Convert(entity);
+
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                _flights.Add(viewModel);
+            });
+        }
+
+        private void Update(Flight entity)
+        {
+            var viewModel = _converter.Convert(entity);
+            var item = _flights.FirstOrDefault(x => x.Number == viewModel.Number);
+
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                int index = _flights.IndexOf(item);
+                _flights[index] = viewModel;
+            });
+        }
+
+        private void Delete(Flight entity)
+        {
+            var viewModel = _converter.Convert(entity);
+            var item = _flights.FirstOrDefault(x => x.Number == viewModel.Number);
+
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                _flights.Remove(item);
+            });
+        }
+
+        private void Load()
         {
             _flights.Clear();
 
             var flights = FlightAPI.Instance.GetAll() as IEnumerable<Flight>;
             var viewModels = _converter.Convert(flights);
-
-            foreach (var viewModel in viewModels)
-            {
-                viewModel.OnDeleted += ViewModel_OnDeleted;
-            }
 
             _flights.AddRange(viewModels);
         }

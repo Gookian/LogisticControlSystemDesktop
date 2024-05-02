@@ -1,7 +1,6 @@
 ﻿using LogisticControlSystemDesktop.REST.API;
 using LogisticControlSystemDesktop.ViewModels;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
 namespace LogisticControlSystemDesktop.Models.converters
 {

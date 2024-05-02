@@ -3,8 +3,6 @@ using LogisticControlSystemDesktop.Models.converters;
 using LogisticControlSystemDesktop.Models.Hubs;
 using LogisticControlSystemDesktop.REST.API;
 using Prism.Mvvm;
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -71,7 +69,7 @@ namespace LogisticControlSystemDesktop.ViewModels.Pages
 
         private ICollectionView _myData;
 
-        private VehicleNotificationHab _hub = new VehicleNotificationHab();
+        private VehicleNotificationHub _hub = new VehicleNotificationHub();
         private VehicleConverter _converter = new VehicleConverter();
         private CollectionViewSource _itemSourceList;
         private DataGrid _grid;
@@ -93,7 +91,6 @@ namespace LogisticControlSystemDesktop.ViewModels.Pages
             ParametrSelected = Parametrs[0];
 
             _hub.OnReceivedNotification += hub_OnReceivedNotification;
-
             _hub.ConnectAsync();
 
             Load();
@@ -131,7 +128,6 @@ namespace LogisticControlSystemDesktop.ViewModels.Pages
             var viewModel = _converter.Convert(entity);
             var item = _vihecles.FirstOrDefault(x => x.Number == viewModel.Number);
             viewModel.BgColor.Freeze();
-            //item.BgColor.Freeze();
 
             Application.Current.Dispatcher.Invoke(() =>
             {
@@ -156,9 +152,9 @@ namespace LogisticControlSystemDesktop.ViewModels.Pages
             _vihecles.Clear();
 
             var vehicles = VehicleAPI.Instance.GetAll() as IEnumerable<Vehicle>;
-            var vehicleDatas = _converter.Convert(vehicles);
+            var viewModels = _converter.Convert(vehicles);
 
-            _vihecles.AddRange(vehicleDatas);
+            _vihecles.AddRange(viewModels);
         }
 
         private bool FilterData(object item)

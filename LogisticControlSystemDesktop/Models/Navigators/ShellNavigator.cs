@@ -4,7 +4,7 @@ namespace LogisticControlSystemDesktop.Models.Navigators
 {
     public class ShellNavigator : Navigator
     {
-        public ShellNavigator(Decorator target, UserControl defaultScreen) : base(target, defaultScreen)
+        public ShellNavigator(Decorator target) : base(target)
         {
         }
     }

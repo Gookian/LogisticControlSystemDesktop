@@ -1,11 +1,13 @@
 ﻿using LogisticControlSystemDesktop.Models;
 using LogisticControlSystemDesktop.Models.converters;
+using LogisticControlSystemDesktop.Models.Hubs;
 using LogisticControlSystemDesktop.REST.API;
 using Prism.Mvvm;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 
@@ -66,6 +68,7 @@ namespace LogisticControlSystemDesktop.ViewModels.Pages
 
         private ICollectionView _myData;
 
+        private DeliveryPointNotificationHub _hub = new DeliveryPointNotificationHub();
         private DeliveryPointConverter _converter = new DeliveryPointConverter();
         private CollectionViewSource _itemSourceList;
         private DataGrid _grid;
@@ -85,41 +88,67 @@ namespace LogisticControlSystemDesktop.ViewModels.Pages
             };
             ParametrSelected = Parametrs[0];
 
-            UpdateVehicles();
+            _hub.OnReceivedNotification += hub_OnReceivedNotification;
+            _hub.ConnectAsync();
+
+            Load();
         }
 
-        public void SignOnCreated(CreateViewModel viewModel)
+        private void hub_OnReceivedNotification(DeliveryPoint entity, UpdateType type)
         {
-            viewModel.OnCreated += ViewModel_OnCreated;
-        }
-
-        private void ViewModel_OnCreated(object item)
-        {
-            var element = (DeliveryPoint)item;
-            _deliveryPoints.Add(_converter.Convert(element));
-        }
-
-        private void ViewModel_OnDeleted(int id)
-        {
-            var viewModel = _deliveryPoints.FirstOrDefault(x => x.Number == id);
-
-            if (viewModel != null)
+            switch (type)
             {
-                _deliveryPoints.Remove(viewModel);
+                case UpdateType.Add:
+                    Create(entity);
+                    break;
+                case UpdateType.Uppdate:
+                    Update(entity);
+                    break;
+                case UpdateType.Delete:
+                    Delete(entity);
+                    break;
             }
         }
 
-        private void UpdateVehicles()
+        private void Create(DeliveryPoint entity)
+        {
+            var viewModel = _converter.Convert(entity);
+
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                _deliveryPoints.Add(viewModel);
+            });
+        }
+
+        private void Update(DeliveryPoint entity)
+        {
+            var viewModel = _converter.Convert(entity);
+            var item = _deliveryPoints.FirstOrDefault(x => x.Number == viewModel.Number);
+
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                int index = _deliveryPoints.IndexOf(item);
+                _deliveryPoints[index] = viewModel;
+            });
+        }
+
+        private void Delete(DeliveryPoint entity)
+        {
+            var viewModel = _converter.Convert(entity);
+            var item = _deliveryPoints.FirstOrDefault(x => x.Number == viewModel.Number);
+
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                _deliveryPoints.Remove(item);
+            });
+        }
+
+        private void Load()
         {
             _deliveryPoints.Clear();
 
             var deliveryPoints = DeliveryPointAPI.Instance.GetAll() as IEnumerable<DeliveryPoint>;
             var viewModels = _converter.Convert(deliveryPoints);
-
-            foreach (var viewModel in viewModels)
-            {
-                viewModel.OnDeleted += ViewModel_OnDeleted;
-            }
 
             _deliveryPoints.AddRange(viewModels);
         }

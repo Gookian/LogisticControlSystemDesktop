@@ -265,8 +265,15 @@
     <Compile Include="Models\Delivery.cs" />
     <Compile Include="Models\DeliveryPoint.cs" />
     <Compile Include="Models\Flight.cs" />
-    <Compile Include="Models\Hubs\ClientNotificationHab.cs" />
-    <Compile Include="Models\Hubs\VehicleNotificationHab.cs" />
+    <Compile Include="Models\Hubs\ClientNotificationHub.cs" />
+    <Compile Include="Models\Hubs\WarehouseNotificationHub.cs" />
+    <Compile Include="Models\Hubs\ProductNotificationHub.cs" />
+    <Compile Include="Models\Hubs\ProductDataNotificationHub.cs" />
+    <Compile Include="Models\Hubs\OrderNotificationHub.cs" />
+    <Compile Include="Models\Hubs\PackageNotificationHub.cs" />
+    <Compile Include="Models\Hubs\DeliveryPointNotificationHub.cs" />
+    <Compile Include="Models\Hubs\FlightNotificationHub.cs" />
+    <Compile Include="Models\Hubs\VehicleNotificationHub.cs" />
     <Compile Include="Models\IdTargetValueItem.cs" />
     <Compile Include="Models\Navigators\MainNavigator.cs" />
     <Compile Include="Models\Navigators\ShellNavigator.cs" />
@@ -491,7 +498,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="delivery-truck.jpg" />
+    <Resource Include="Assets\Images\delivery-truck.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

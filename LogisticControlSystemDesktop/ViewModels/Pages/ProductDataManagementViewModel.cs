@@ -1,11 +1,13 @@
 ﻿using LogisticControlSystemDesktop.Models;
 using LogisticControlSystemDesktop.Models.converters;
+using LogisticControlSystemDesktop.Models.Hubs;
 using LogisticControlSystemDesktop.REST.API;
 using Prism.Mvvm;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 
@@ -66,6 +68,7 @@ namespace LogisticControlSystemDesktop.ViewModels.Pages
 
         private ICollectionView _myData;
 
+        private ProductDataNotificationHub _hub = new ProductDataNotificationHub();
         private ProductDataConverter  _converter = new ProductDataConverter();
         private CollectionViewSource _itemSourceList;
         private DataGrid _grid;
@@ -84,41 +87,67 @@ namespace LogisticControlSystemDesktop.ViewModels.Pages
             };
             ParametrSelected = Parametrs[0];
 
-            UpdateVehicles();
-        }
-        
-        public void SignOnCreated(CreateViewModel viewModel)
-        {
-            viewModel.OnCreated += ViewModel_OnCreated;
+            _hub.OnReceivedNotification += hub_OnReceivedNotification;
+            _hub.ConnectAsync();
+
+            Load();
         }
 
-        private void ViewModel_OnCreated(object item)
+        private void hub_OnReceivedNotification(ProductData entity, UpdateType type)
         {
-            var element = (ProductData)item;
-            _productDatas.Add(_converter.Convert(element));
-        }
-
-        private void ViewModel_OnDeleted(int id)
-        {
-            var viewModel = _productDatas.FirstOrDefault(x => x.Number == id);
-
-            if (viewModel != null)
+            switch (type)
             {
-                _productDatas.Remove(viewModel);
+                case UpdateType.Add:
+                    Create(entity);
+                    break;
+                case UpdateType.Uppdate:
+                    Update(entity);
+                    break;
+                case UpdateType.Delete:
+                    Delete(entity);
+                    break;
             }
         }
 
-        private void UpdateVehicles()
+        private void Create(ProductData entity)
+        {
+            var viewModel = _converter.Convert(entity);
+
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                _productDatas.Add(viewModel);
+            });
+        }
+
+        private void Update(ProductData entity)
+        {
+            var viewModel = _converter.Convert(entity);
+            var item = _productDatas.FirstOrDefault(x => x.Number == viewModel.Number);
+
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                int index = _productDatas.IndexOf(item);
+                _productDatas[index] = viewModel;
+            });
+        }
+
+        private void Delete(ProductData entity)
+        {
+            var viewModel = _converter.Convert(entity);
+            var item = _productDatas.FirstOrDefault(x => x.Number == viewModel.Number);
+
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                _productDatas.Remove(item);
+            });
+        }
+
+        private void Load()
         {
             _productDatas.Clear();
 
             var productDatas = ProductDataAPI.Instance.GetAll() as IEnumerable<ProductData>;
             var viewModels = _converter.Convert(productDatas);
-
-            foreach (var viewModel in viewModels)
-            {
-                viewModel.OnDeleted += ViewModel_OnDeleted;
-            }
 
             _productDatas.AddRange(viewModels);
         }
