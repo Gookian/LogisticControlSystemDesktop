@@ -1,5 +1,6 @@
 ﻿using System.Net.Http;
 using System;
+using System.Configuration;
 
 namespace LogisticControlSystemDesktop.Models.REST.API
 {
@@ -11,7 +12,7 @@ namespace LogisticControlSystemDesktop.Models.REST.API
 
         private string _controllerName = "Authentication";
 
-        private string _baseApiUrl = "http://79.136.223.154:5115/api/";//"https://localhost:7141/api/";
+        private string _baseApiUrl = ConfigurationManager.AppSettings.Get("baseUrl") + "/api/";
 
         public AuthenticationAPI() : base()
         {

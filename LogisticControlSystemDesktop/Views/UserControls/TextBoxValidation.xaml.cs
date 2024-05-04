@@ -8,11 +8,11 @@ namespace LogisticControlSystemDesktop.Views.UserControls
     /// </summary>
     public partial class TextBoxValidation : UserControl
     {
-        public TextBoxValidation(string name, string title, string value)
+        public TextBoxValidation(string name, string title, string hint, string value, int min, int max, string pattern)
         {
             InitializeComponent();
 
-            BaseFieldViewModel viewModel = new TextBoxValidationViewModel(name, title, value);
+            BaseFieldViewModel viewModel = new TextBoxValidationViewModel(name, title, hint, value, max, min, pattern);
             DataContext = viewModel;
         }
     }

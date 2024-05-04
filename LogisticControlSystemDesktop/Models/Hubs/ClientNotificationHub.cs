@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.SignalR.Client;
 using LogisticControlSystemDesktop.Models.REST.API;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Configuration;
 
 namespace LogisticControlSystemDesktop.Models.Hubs
 {
@@ -12,7 +13,7 @@ namespace LogisticControlSystemDesktop.Models.Hubs
 
         protected virtual string HubName { get; set; }
 
-        protected string baseApiUrl = "http://79.136.223.154:5115";
+        protected string baseApiUrl = ConfigurationManager.AppSettings.Get("baseUrl");
 
         public delegate void EventNotificationHandler(TEntity entity, UpdateType type);
         public event EventNotificationHandler OnReceivedNotification;

@@ -40,7 +40,7 @@ namespace LogisticControlSystemDesktop.Models.Navigators
             };
             _screens.Add(item);
             _target.Child = item.Screen;
-
+            
             OnOpen?.Invoke(item.Id, item.Title);
 
             return item.Id;

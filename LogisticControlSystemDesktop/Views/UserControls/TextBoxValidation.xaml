@@ -13,7 +13,19 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0" Text="{Binding Title}" FontSize="16" Foreground="#5e69ee" Margin="5 0 0 10"/>
-        <TextBox Grid.Row="1" Text="{Binding Value, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Style="{DynamicResource CustomTextBoxStyle}"/>
+        <TextBox x:Name="name" Grid.Row="1" Text="{Binding Value, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Style="{DynamicResource CustomTextBoxStyle}"/>
+        <TextBlock Grid.Row="1" Text="{Binding Hint}" VerticalAlignment="Center" Padding="10 0 0 0" IsHitTestVisible="False" Foreground="#AA333333">
+            <TextBlock.Style>
+                <Style TargetType="{x:Type TextBlock}">
+                    <Setter Property="Visibility" Value="Collapsed"></Setter>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Text, ElementName = name}" Value="">
+                            <Setter Property="Visibility" Value="Visible"></Setter>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
         <TextBlock Grid.Row="2" Text="{Binding Error}" FontSize="13" Foreground="#FFEE5E5E" Margin="5 5 0 0"/>
     </Grid>
 </UserControl>

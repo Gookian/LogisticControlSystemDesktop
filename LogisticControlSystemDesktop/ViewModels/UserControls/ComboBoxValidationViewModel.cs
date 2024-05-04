@@ -107,6 +107,20 @@ namespace LogisticControlSystemDesktop.ViewModels.UserControls
             return parametrs;
         }
 
+        public bool Validate()
+        {
+            if (Value.Length != 0)
+            {
+                Error = "";
+                OnPropertyChanged(nameof(Error));
+                return true;
+            }
+
+            Error = "Ничего не выбрано";
+            OnPropertyChanged(nameof(Error));
+            return false;
+        }
+
         private void OnPropertyChanged(string propName)
         {
             if (PropertyChanged != null)

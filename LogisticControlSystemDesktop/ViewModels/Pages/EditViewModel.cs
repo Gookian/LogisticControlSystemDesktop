@@ -52,7 +52,7 @@ namespace LogisticControlSystemDesktop.ViewModels.Pages
             {
                 if (!item.Name.EndsWith("Id"))
                 {
-                    FormFields.Add(new TextBoxValidation(item.Name, item.Title, ""));
+                    FormFields.Add(new TextBoxValidation(item.Name, item.Title, item.Hint, "", item.Min, item.Max, item.Pattern));
                 }
                 else
                 {
@@ -95,6 +95,36 @@ namespace LogisticControlSystemDesktop.ViewModels.Pages
         }
 
         private void Save_Click()
+        {
+            ValidateFields();
+        }
+
+        private void ValidateFields()
+        {
+            bool valid = true;
+            foreach (var item in FormFields)
+            {
+                if (item is TextBoxValidation)
+                {
+                    var viewModel = item.DataContext as TextBoxValidationViewModel;
+                    if (!viewModel.Validate())
+                    {
+                        valid = false;
+                    }
+                }
+                else if (item is ComboBoxValidation)
+                {
+                    var viewModel = item.DataContext as ComboBoxValidationViewModel;
+                }
+            }
+
+            if (valid)
+            {
+                Save();
+            }
+        }
+
+        private void Save()
         {
             var instance = Activator.CreateInstance(_type);
 
@@ -146,7 +176,7 @@ namespace LogisticControlSystemDesktop.ViewModels.Pages
             }
             else
             {
-                MessageBox.Show("error");
+                MessageBox.Show("Не удалось изменить запись!");
             }
         }
     }
