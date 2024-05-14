@@ -17,14 +17,13 @@ namespace LogisticControlSystemDesktop.ViewModels
 
         public DelegateCommand DeleteClick { get; set; }
         public DelegateCommand EditClick { get; set; }
-
-        public delegate void DeleteHandler(int id);
-        public event DeleteHandler OnDeleted;
+        public DelegateCommand OpenProductsClick { get; set; }
 
         public WarehouseViewModel()
         {
             DeleteClick = new DelegateCommand(Delete_Click);
             EditClick = new DelegateCommand(Edit_Click);
+            OpenProductsClick = new DelegateCommand(OpenProducts_Click);
         }
 
         public void Delete_Click()
@@ -37,6 +36,13 @@ namespace LogisticControlSystemDesktop.ViewModels
             var view = new Edit(Number, "Редактирование склада", WarehouseAPI.Instance, typeof(Warehouse));
 
             MainNavigator.Instance.Open(view, "Редактирование склада");
+        }
+
+        public void OpenProducts_Click()
+        {
+            var view = new Views.Pages.ProductInWarehouse(Number, Name);
+
+            MainNavigator.Instance.Open(view, "Товары на складе: " + Name);
         }
     }
 }

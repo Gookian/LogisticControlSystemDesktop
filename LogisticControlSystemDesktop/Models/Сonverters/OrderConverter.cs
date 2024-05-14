@@ -26,7 +26,7 @@ namespace LogisticControlSystemDesktop.Models.converters
                 MiddleName = item.MiddleName,
                 Surname = item.Surname,
                 Address = item.Address,
-                DeliveryDateTime = item.DeliveryDateTime,
+                DeliveryDateTime = item.DeliveryDateTime.ToString("dd.MM.yyyy HH:mm:ss"),
             };
 
             return result;

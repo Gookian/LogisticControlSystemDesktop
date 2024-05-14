@@ -281,7 +281,7 @@
     <Compile Include="Models\OrderDetail.cs" />
     <Compile Include="Models\Package.cs" />
     <Compile Include="Models\PackageState.cs" />
-    <Compile Include="Models\PackageСontent.cs" />
+    <Compile Include="Models\PackageContent.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\ProductData.cs" />
     <Compile Include="Models\ProductInWarehouse.cs" />
@@ -289,13 +289,14 @@
     <Compile Include="Models\REST\API\AuthenticationAPI.cs" />
     <Compile Include="Models\REST\API\DeliveryPointAPI.cs" />
     <Compile Include="Models\REST\API\OrderAPI.cs" />
+    <Compile Include="Models\REST\API\ProductInWarehouseAPI.cs" />
     <Compile Include="Models\REST\API\ProductAPI.cs" />
     <Compile Include="Models\REST\API\ProductDataAPI.cs" />
     <Compile Include="Models\REST\API\ProductStateAPI.cs" />
     <Compile Include="Models\REST\API\DeliveryAPI.cs" />
     <Compile Include="Models\REST\API\FlightAPI.cs" />
     <Compile Include="Models\REST\API\PackageAPI.cs" />
-    <Compile Include="Models\REST\API\PackageСontentAPI.cs" />
+    <Compile Include="Models\REST\API\PackageContentAPI.cs" />
     <Compile Include="Models\REST\API\PackageStateAPI.cs" />
     <Compile Include="Models\REST\API\WarehouseAPI.cs" />
     <Compile Include="Models\UpdateType.cs" />
@@ -322,6 +323,8 @@
     <Compile Include="ViewModels\Pages\PackageManagementViewModel.cs" />
     <Compile Include="ViewModels\Pages\OrderManagementViewModel.cs" />
     <Compile Include="ViewModels\Pages\ProductDataManagementViewModel.cs" />
+    <Compile Include="ViewModels\Pages\PackageContentViewModel.cs" />
+    <Compile Include="ViewModels\Pages\ProductsInWarehouseViewModel.cs" />
     <Compile Include="ViewModels\Pages\ProductManagementViewModel.cs" />
     <Compile Include="ViewModels\Pages\FlightManagementViewModel.cs" />
     <Compile Include="ViewModels\Pages\WarehouseManagementViewModel.cs" />
@@ -346,6 +349,12 @@
     </Compile>
     <Compile Include="Views\Pages\Create.xaml.cs">
       <DependentUpon>Create.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\PackageContentView.xaml.cs">
+      <DependentUpon>PackageContentView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\ProductsInWarehouse.xaml.cs">
+      <DependentUpon>ProductsInWarehouse.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Pages\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
@@ -429,6 +438,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Pages\Create.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Pages\PackageContentView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Pages\ProductsInWarehouse.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

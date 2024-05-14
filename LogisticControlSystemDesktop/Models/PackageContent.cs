@@ -1,6 +1,6 @@
 ﻿namespace LogisticControlSystemDesktop.Models
 {
-    public class PackageСontent
+    public class PackageContent
     {
         public int PackageСontentId { get; set; }
 

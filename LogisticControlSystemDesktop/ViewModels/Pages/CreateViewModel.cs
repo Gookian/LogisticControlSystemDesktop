@@ -12,6 +12,8 @@ using Prism.Mvvm;
 using System.ComponentModel;
 using System.Collections.Generic;
 using LogisticControlSystemDesktop.Models.Navigators;
+using System.Globalization;
+using System.Text.RegularExpressions;
 
 namespace LogisticControlSystemDesktop.ViewModels.Pages
 {
@@ -57,7 +59,7 @@ namespace LogisticControlSystemDesktop.ViewModels.Pages
                 }
                 else
                 {
-                    FormFields.Add(new ComboBoxValidation(item.Name, item.Title, 1));
+                    FormFields.Add(new ComboBoxValidation(item.Name, item.Title, item.Hint, 1));
                 }
             }
         }
@@ -129,6 +131,10 @@ namespace LogisticControlSystemDesktop.ViewModels.Pages
                                 break;
                             case TypeCode.String:
                                 property.SetValue(instance, viewModel.Value);
+                                break;
+                            case TypeCode.DateTime:
+                                DateTime date = DateTime.ParseExact(viewModel.Value, "dd.MM.yyyy HH:mm:ss", CultureInfo.InvariantCulture);
+                                property.SetValue(instance, date);
                                 break;
                             default:
                                 break;

@@ -27,7 +27,19 @@
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Row="0" Grid.Column="0" Text="Транспортные средства" Foreground="#5e69ee" FontWeight="Bold" FontSize="20" Margin="0 0 0 20"></TextBlock>
                 <ComboBox ItemsSource="{Binding Path=Parametrs}" SelectedValue="{Binding Path=ParametrSelected}" Style="{DynamicResource CustomComboBoxStyle}" ItemsPanel="{DynamicResource CustomComboBoxItemsPanel}" ItemContainerStyle="{DynamicResource CustomComboBoxItemContainerStyle}" ItemTemplate="{DynamicResource CustomComboBoxItemTemplate}" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" Width="200" Margin="10 0 10 0"/>
-                <TextBox Grid.Row="0" Grid.Column="2" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Style="{DynamicResource CustomTextBoxSearchStyle}" Width="400" HorizontalAlignment="Right"/>
+                <TextBox Name="search" Grid.Row="0" Grid.Column="2" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Style="{DynamicResource CustomTextBoxSearchStyle}" Width="400" HorizontalAlignment="Right"/>
+                <TextBlock Grid.Row="0" Grid.Column="2" Text="Введите строку для поиска" VerticalAlignment="Center" Padding="15 0 0 0" IsHitTestVisible="False" Foreground="#AA333333">
+                    <TextBlock.Style>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="Visibility" Value="Collapsed"></Setter>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Text, ElementName = search}" Value="">
+                                    <Setter Property="Visibility" Value="Visible"></Setter>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
                 <ScrollViewer x:Name="scrollWiever" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Style="{DynamicResource CustomScrollViewerStyle}" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
                     <DataGrid Width="1450" ItemsSource="{Binding Vihecles}" Style="{DynamicResource CustomDataGridStyle}" CellStyle="{DynamicResource CustomDataGridCellStyle}" ColumnHeaderStyle="{DynamicResource CustomDataGridColumnHeaderStyle}" RowStyle="{DynamicResource CustomDataGridRowStyle}" x:Name="myData">
                         <DataGrid.Columns>

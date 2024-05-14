@@ -51,6 +51,7 @@ namespace LogisticControlSystemDesktop.Models.REST.API
             httpClient.DefaultRequestHeaders.Authorization =
                 new AuthenticationHeaderValue(AuthenticationAPI.Instance.Token);
 
+            
             var response = httpClient.GetAsync(baseUrl).Result;
 
             if (!response.IsSuccessStatusCode)

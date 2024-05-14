@@ -22,9 +22,10 @@ namespace LogisticControlSystemDesktop
             new OrderAPI();
             new PackageAPI();
             new PackageStateAPI();
-            new PackageСontentAPI();
+            new PackageContentAPI();
             new ProductAPI();
             new ProductDataAPI();
+            new ProductInWarehouseAPI();
             new ProductStateAPI();
             new DeliveryAPI();
             new DeliveryPointAPI();

@@ -24,7 +24,7 @@ namespace LogisticControlSystemDesktop.Models.converters
                 Number = item.PackageId,
                 StateName = item.PackageState.Name,
                 PackageNumber = item.Number,
-                BuildDeadline = item.BuildDeadline
+                BuildDeadline = item.BuildDeadline.ToString("dd.MM.yyyy HH:mm:ss")
             };
 
             return result;

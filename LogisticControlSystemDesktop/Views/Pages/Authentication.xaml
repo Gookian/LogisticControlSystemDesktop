@@ -10,7 +10,7 @@
         <Grid.Background>
             <ImageBrush ImageSource="../../Assets/Images/delivery-truck.jpg" TileMode="Tile" Opacity="0.4 " Stretch="Uniform" AlignmentY="Top" Viewport="0,0,250,250" ViewportUnits="Absolute" />
         </Grid.Background>
-        <Border Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Width="400" Height="400" Background="#FFF4F4FB" CornerRadius="10" Padding="20">
+        <Border Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Width="400" VerticalAlignment="Center" HorizontalAlignment="Center" Background="#FFF4F4FB" CornerRadius="10" Padding="20">
             <Border.Effect>
                 <DropShadowEffect ShadowDepth="0" Opacity="0.5" BlurRadius="10" Color="#5e69ee"/>
             </Border.Effect>
@@ -26,21 +26,45 @@
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <Grid Grid.Row="0">
+                    <Grid Grid.Row="0" Margin="0 0 0 10">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
                         <TextBlock Grid.Row="0" Text="Логин" FontSize="16" Foreground="#5e69ee" VerticalAlignment="Bottom" Margin="5 0 0 10"/>
-                        <TextBox Grid.Row="1" Height="40" Text="{Binding Login, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Style="{DynamicResource CustomTextBoxStyle}"/>
+                        <TextBox Name="login" Grid.Row="1" Height="40" Text="{Binding Login, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Style="{DynamicResource CustomTextBoxStyle}"/>
+                        <TextBlock Grid.Row="1" Text="Введите логин" VerticalAlignment="Center" Padding="10 0 0 0" IsHitTestVisible="False" Foreground="#AA333333">
+                            <TextBlock.Style>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="Visibility" Value="Collapsed"></Setter>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Text, ElementName = login}" Value="">
+                                            <Setter Property="Visibility" Value="Visible"></Setter>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
                     </Grid>
-                    <Grid Grid.Row="1">
+                    <Grid Grid.Row="1" Margin="0 0 0 30">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
                         <TextBlock Grid.Row="0" Text="Пароль" FontSize="16" Foreground="#5e69ee" VerticalAlignment="Bottom" Margin="5 0 0 10"/>
-                        <TextBox Grid.Row="1" Height="40" Text="{Binding Password, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Style="{DynamicResource CustomTextBoxStyle}"/>
+                        <TextBox Name="password" Grid.Row="1" Height="40" Text="{Binding Password, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Style="{DynamicResource CustomTextBoxStyle}"/>
+                        <TextBlock Grid.Row="1" Text="Введите пароль" VerticalAlignment="Center" Padding="10 0 0 0" IsHitTestVisible="False" Foreground="#AA333333">
+                            <TextBlock.Style>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="Visibility" Value="Collapsed"></Setter>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Text, ElementName = password}" Value="">
+                                            <Setter Property="Visibility" Value="Visible"></Setter>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
                     </Grid>
                     <Button Grid.Row="2" Height="40" Content="Войти" VerticalAlignment="Bottom" Style="{DynamicResource CustomButtonStyle}">
                         <Button.InputBindings>

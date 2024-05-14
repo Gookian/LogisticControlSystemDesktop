@@ -8,11 +8,11 @@ namespace LogisticControlSystemDesktop.Views.UserControls
     /// </summary>
     public partial class ComboBoxValidation : UserControl
     {
-        public ComboBoxValidation(string name, string title, int value)
+        public ComboBoxValidation(string name, string title, string hint, int value)
         {
             InitializeComponent();
 
-            BaseFieldViewModel viewModel = new ComboBoxValidationViewModel(name, title, value);
+            BaseFieldViewModel viewModel = new ComboBoxValidationViewModel(name, title, hint, value);
             DataContext = viewModel;
         }
     }

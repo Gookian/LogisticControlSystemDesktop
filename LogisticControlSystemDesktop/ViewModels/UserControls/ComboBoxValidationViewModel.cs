@@ -1,16 +1,10 @@
 ﻿using LogisticControlSystemDesktop.Models;
 using LogisticControlSystemDesktop.Models.REST.API;
-using LogisticControlSystemDesktop.REST.API;
-using Prism.Mvvm;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 
 namespace LogisticControlSystemDesktop.ViewModels.UserControls
 {
@@ -18,6 +12,7 @@ namespace LogisticControlSystemDesktop.ViewModels.UserControls
     {
         public override string FieldName { get => base.FieldName; set => base.FieldName = value; }
         public string Title { get; set; } = "Заголовок";
+        public string Hint { get; set; } = "Введите текст";
         public override ObservableCollection<IdTargetValueItem> Parametrs
         {
             get => base.Parametrs;
@@ -43,10 +38,11 @@ namespace LogisticControlSystemDesktop.ViewModels.UserControls
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public ComboBoxValidationViewModel(string name, string title, int id) 
+        public ComboBoxValidationViewModel(string name, string title, string hint, int id) 
         {
             FieldName = name;
             Title = title;
+            Hint = hint;
 
             Parametrs = new ObservableCollection<IdTargetValueItem>();
             Parametrs.AddRange(GetParametrs());

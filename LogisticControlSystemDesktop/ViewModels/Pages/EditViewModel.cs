@@ -10,6 +10,8 @@ using LogisticControlSystemDesktop.ViewModels.UserControls;
 using System.Windows;
 using System.Collections.Generic;
 using LogisticControlSystemDesktop.Models.Navigators;
+using System.Text.RegularExpressions;
+using System.Globalization;
 
 namespace LogisticControlSystemDesktop.ViewModels.Pages
 {
@@ -52,11 +54,11 @@ namespace LogisticControlSystemDesktop.ViewModels.Pages
             {
                 if (!item.Name.EndsWith("Id"))
                 {
-                    FormFields.Add(new TextBoxValidation(item.Name, item.Title, item.Hint, "", item.Min, item.Max, item.Pattern));
+                    FormFields.Add(new TextBoxValidation(item.Name, item.Title, item.Hint, "", item.Max, item.Min, item.Pattern));
                 }
                 else
                 {
-                    FormFields.Add(new ComboBoxValidation(item.Name, item.Title, 1));
+                    FormFields.Add(new ComboBoxValidation(item.Name, item.Title, item.Hint, 1));
                 }
             }
         }
@@ -78,7 +80,26 @@ namespace LogisticControlSystemDesktop.ViewModels.Pages
                         viewModel.SetSelected((int)value);
                         break;
                     case nameof(TextBoxValidationViewModel):
-                        viewModel.Value = value.ToString();
+                        var propertyType = property.PropertyType;
+                        var typeCode = Type.GetTypeCode(propertyType);
+
+                        switch (typeCode)
+                        {
+                            case TypeCode.Int32:
+                                viewModel.Value = value.ToString();
+                                break;
+                            case TypeCode.Double:
+                                viewModel.Value = value.ToString();
+                                break;
+                            case TypeCode.String:
+                                viewModel.Value = value.ToString();
+                                break;
+                            case TypeCode.DateTime:
+                                viewModel.Value = ((DateTime)value).ToString("dd.MM.yyyy HH:mm:ss");
+                                break;
+                            default:
+                                break;
+                        }
                         break;
                     default:
                         break;
@@ -158,6 +179,10 @@ namespace LogisticControlSystemDesktop.ViewModels.Pages
                                 break;
                             case TypeCode.String:
                                 property.SetValue(instance, viewModel.Value);
+                                break;
+                            case TypeCode.DateTime:
+                                DateTime date = DateTime.ParseExact(viewModel.Value, "dd.MM.yyyy HH:mm:ss", CultureInfo.InvariantCulture);
+                                property.SetValue(instance, date);
                                 break;
                             default:
                                 break;

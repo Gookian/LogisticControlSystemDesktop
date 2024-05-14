@@ -15,7 +15,7 @@ namespace LogisticControlSystemDesktop.ViewModels
         public string MiddleName { get; set; }
         public string Surname { get; set; }
         public string Address { get; set; }
-        public DateTime DeliveryDateTime { get; set; }
+        public string DeliveryDateTime { get; set; }
 
         public DelegateCommand DeleteClick { get; set; }
         public DelegateCommand EditClick { get; set; }

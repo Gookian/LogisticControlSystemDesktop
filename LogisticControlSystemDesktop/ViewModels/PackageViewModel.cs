@@ -5,6 +5,7 @@ using LogisticControlSystemDesktop.Views.Pages;
 using Prism.Commands;
 using Prism.Mvvm;
 using System;
+using System.Xml.Linq;
 
 namespace LogisticControlSystemDesktop.ViewModels
 {
@@ -13,15 +14,17 @@ namespace LogisticControlSystemDesktop.ViewModels
         public int Number { get; set; }
         public int PackageNumber { get; set; }
         public string StateName { get; set; }
-        public DateTime BuildDeadline { get; set; }
+        public string BuildDeadline { get; set; }
 
         public DelegateCommand DeleteClick { get; set; }
         public DelegateCommand EditClick { get; set; }
+        public DelegateCommand OpenProductsClick { get; set; }
 
         public PackageViewModel()
         {
             DeleteClick = new DelegateCommand(Delete_Click);
             EditClick = new DelegateCommand(Edit_Click);
+            OpenProductsClick = new DelegateCommand(OpenProducts_Click);
         }
 
         public void Delete_Click()
@@ -34,6 +37,13 @@ namespace LogisticControlSystemDesktop.ViewModels
             var view = new Edit(Number, "Редактирование посылки", PackageAPI.Instance, typeof(Package));
 
             MainNavigator.Instance.Open(view, "Редактирование посылки");
+        }
+
+        public void OpenProducts_Click()
+        {
+            var view = new PackageContentView(Number, PackageNumber.ToString());
+
+            MainNavigator.Instance.Open(view, "Товары в посылке: " + PackageNumber);
         }
     }
 }
