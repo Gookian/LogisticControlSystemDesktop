@@ -324,6 +324,7 @@
     <Compile Include="ViewModels\Pages\OrderManagementViewModel.cs" />
     <Compile Include="ViewModels\Pages\ProductDataManagementViewModel.cs" />
     <Compile Include="ViewModels\Pages\PackageContentViewModel.cs" />
+    <Compile Include="ViewModels\Pages\ProductInfoViewModel.cs" />
     <Compile Include="ViewModels\Pages\ProductsInWarehouseViewModel.cs" />
     <Compile Include="ViewModels\Pages\ProductManagementViewModel.cs" />
     <Compile Include="ViewModels\Pages\FlightManagementViewModel.cs" />
@@ -352,6 +353,9 @@
     </Compile>
     <Compile Include="Views\Pages\PackageContentView.xaml.cs">
       <DependentUpon>PackageContentView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\ProductInfo.xaml.cs">
+      <DependentUpon>ProductInfo.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Pages\ProductsInWarehouse.xaml.cs">
       <DependentUpon>ProductsInWarehouse.xaml</DependentUpon>
@@ -442,6 +446,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Pages\PackageContentView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Pages\ProductInfo.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

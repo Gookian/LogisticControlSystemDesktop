@@ -54,7 +54,11 @@
                             <DataGridTemplateColumn Header="Данные о товаре" IsReadOnly="True" Width="*">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Button Style="{DynamicResource CustomButtonStyle}" Content="{Binding DataName}" FontSize="13" Height="40" />
+                                        <Button Style="{DynamicResource CustomButtonStyle}" Content="{Binding DataName}" FontSize="13" Height="40">
+                                            <Button.InputBindings>
+                                                <MouseBinding MouseAction="LeftClick" Command="{Binding OpenProductClick}" />
+                                            </Button.InputBindings>
+                                        </Button>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>

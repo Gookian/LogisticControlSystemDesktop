@@ -18,6 +18,7 @@ namespace LogisticControlSystemDesktop.ViewModels
         public string DisplayName { get; set; } = "Система контроля логистики";
 
         public DelegateCommand<string> Open { get; set; }
+        public DelegateCommand Exit { get; set; }
 
         private Guid _target;
         private StackPanel _navigatePanel;
@@ -29,6 +30,7 @@ namespace LogisticControlSystemDesktop.ViewModels
             _navigatePanel = navigatePanel;
 
             Open = new DelegateCommand<string>(Open_Click);
+            Exit = new DelegateCommand(Exit_Click);
 
             MainNavigator navigator = new MainNavigator(border);
             navigator.OnOpen += Navigator_OnOpen;
@@ -53,6 +55,12 @@ namespace LogisticControlSystemDesktop.ViewModels
             _registerScreen.Add("Order", typeof(Create));
             _registerScreen.Add("Product", typeof(Create));
             _registerScreen.Add("ProductData", typeof(Create));
+        }
+
+        private void Exit_Click()
+        {
+            AuthenticationAPI.Instance.RemoveAuthentication();
+            ShellViewModel.Instance.Navigator.Open(new Authentication(), "Авторизация");
         }
 
         public void Open_Click(string title)

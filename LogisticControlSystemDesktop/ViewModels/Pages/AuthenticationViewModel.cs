@@ -25,7 +25,7 @@ namespace LogisticControlSystemDesktop.ViewModels.Pages
 
             if (token != null)
             {
-                ShellNavigator.Instance.Open(new Main(), "Оснавная");
+                ShellViewModel.Instance.Navigator.Open(new Main(), "Оснавная");
             }
             else
             {

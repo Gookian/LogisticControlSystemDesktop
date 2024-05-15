@@ -17,12 +17,11 @@
             </Grid.RowDefinitions>
             <Menu Grid.Row="0" Height="25" VerticalAlignment="Top" Background="#FF5E69EE" Foreground="#FFF4F4FB" FontSize="14">
                 <MenuItem Header="Меню">
-                    <MenuItem Header="Настройки" Foreground="#5e69ee">
+                    <MenuItem Header="Выход" Foreground="#5e69ee">
                         <MenuItem.InputBindings>
-                            <MouseBinding MouseAction="LeftClick" Command="{Binding Open}" CommandParameter="Пустая страница" />
+                            <MouseBinding MouseAction="LeftClick" Command="{Binding Exit}"/>
                         </MenuItem.InputBindings>
                     </MenuItem>
-                    <MenuItem Header="Выход" Foreground="#5e69ee"/>
                 </MenuItem>
                 <MenuItem Header="Главная">
                     <MenuItem.InputBindings>
@@ -112,13 +111,6 @@
                     <MenuItem Header="Заказ" Foreground="#5e69ee">
                         <MenuItem.InputBindings>
                             <MouseBinding MouseAction="LeftClick" Command="{Binding Open}" CommandParameter="Order" />
-                        </MenuItem.InputBindings>
-                    </MenuItem>
-                </MenuItem>
-                <MenuItem Header="Вид">
-                    <MenuItem Header="Темы" Foreground="#5e69ee">
-                        <MenuItem.InputBindings>
-                            <MouseBinding MouseAction="LeftClick" Command="{Binding Open}" CommandParameter="Пустая страница" />
                         </MenuItem.InputBindings>
                     </MenuItem>
                 </MenuItem>

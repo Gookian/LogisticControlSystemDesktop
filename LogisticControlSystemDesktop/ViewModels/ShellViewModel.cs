@@ -7,13 +7,18 @@ namespace LogisticControlSystemDesktop.ViewModels
 {
     public class ShellViewModel : BindableBase
     {
+        static public ShellViewModel Instance { get; set; }
         public string DisplayName { get; set; } = "Система контроля логистики";
+        public ShellNavigator Navigator { get; set; }
+
 
         public ShellViewModel(Border mainPanel)
         {
-            ShellNavigator navigator = new ShellNavigator(mainPanel);
+            Navigator = new ShellNavigator(mainPanel);
 
-            navigator.Open(new Authentication(), "Авторизация");
+            Navigator.Open(new Authentication(), "Авторизация");
+
+            Instance = this;
         }
     }
 }

@@ -1,6 +1,8 @@
 ﻿using System.Net.Http;
 using System;
 using System.Configuration;
+using Newtonsoft.Json;
+using System.Text;
 
 namespace LogisticControlSystemDesktop.Models.REST.API
 {
@@ -41,6 +43,20 @@ namespace LogisticControlSystemDesktop.Models.REST.API
 
                 Token = result.ToString();
                 return result;
+            }
+        }
+
+        public void RemoveAuthentication()
+        {
+            var httpClient = new HttpClient();
+            var baseUrl = _baseApiUrl + _controllerName + $"?tokenValue={Token}";
+            httpClient.BaseAddress = new Uri(baseUrl);
+
+            var response = httpClient.DeleteAsync(baseUrl).Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+                Token = "";
             }
         }
     }
