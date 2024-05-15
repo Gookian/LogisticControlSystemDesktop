@@ -1,5 +1,5 @@
 ﻿using LogisticControlSystemDesktop.Models.Navigators;
-using LogisticControlSystemDesktop.REST.API;
+using LogisticControlSystemDesktop.Models.REST.API;
 using LogisticControlSystemDesktop.Views.Pages;
 using Prism.Commands;
 using Prism.Mvvm;

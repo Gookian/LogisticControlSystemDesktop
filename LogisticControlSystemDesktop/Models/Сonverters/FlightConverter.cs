@@ -1,4 +1,4 @@
-﻿using LogisticControlSystemDesktop.REST.API;
+﻿using LogisticControlSystemDesktop.Models.REST.API;
 using LogisticControlSystemDesktop.ViewModels;
 using System.Collections.Generic;
 

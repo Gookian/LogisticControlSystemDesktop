@@ -1,5 +1,4 @@
 ﻿using LogisticControlSystemDesktop.Models.REST.API;
-using LogisticControlSystemDesktop.REST.API;
 using LogisticControlSystemDesktop.Views;
 using Prism.Ioc;
 using Prism.Modularity;
@@ -20,6 +19,7 @@ namespace LogisticControlSystemDesktop
             new WarehouseAPI();
             new FlightAPI();
             new OrderAPI();
+            new OrderPickUpPointAPI();
             new PackageAPI();
             new PackageStateAPI();
             new PackageContentAPI();
@@ -27,6 +27,7 @@ namespace LogisticControlSystemDesktop
             new ProductDataAPI();
             new ProductInWarehouseAPI();
             new ProductStateAPI();
+            new SortingСenterAPI();
             new DeliveryAPI();
             new DeliveryPointAPI();
 

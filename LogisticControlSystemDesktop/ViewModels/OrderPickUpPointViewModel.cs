@@ -7,17 +7,18 @@ using Prism.Mvvm;
 
 namespace LogisticControlSystemDesktop.ViewModels
 {
-    public class ProductDataViewModel : BindableBase
+    public class OrderPickUpPointViewModel : BindableBase
     {
         public int Number { get; set; }
         public string Name { get; set; }
-        public string Article { get; set; }
-        public int Cost { get; set; }
+        public string Address { get; set; }
+        public double Latitude { get; set; }
+        public double Longitude { get; set; }
 
         public DelegateCommand DeleteClick { get; set; }
         public DelegateCommand EditClick { get; set; }
 
-        public ProductDataViewModel()
+        public OrderPickUpPointViewModel()
         {
             DeleteClick = new DelegateCommand(Delete_Click);
             EditClick = new DelegateCommand(Edit_Click);
@@ -25,14 +26,14 @@ namespace LogisticControlSystemDesktop.ViewModels
 
         public void Delete_Click()
         {
-            ProductDataAPI.Instance.Delete(Number);
+            OrderPickUpPointAPI.Instance.Delete(Number);
         }
 
         public void Edit_Click()
         {
-            var view = new Edit(Number, "Редактирование данных товара", ProductDataAPI.Instance, typeof(ProductData));
+            var view = new Edit(Number, "Редактирование ПВЗ", OrderPickUpPointAPI.Instance, typeof(OrderPickUpPoint));
 
-            MainNavigator.Instance.Open(view, "Редактирование данных товара");
+            MainNavigator.Instance.Open(view, "Редактирование склада");
         }
     }
 }

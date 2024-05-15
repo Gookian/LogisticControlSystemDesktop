@@ -51,6 +51,16 @@
                             <MouseBinding MouseAction="LeftClick" Command="{Binding Open}" CommandParameter="Управление складами" />
                         </MenuItem.InputBindings>
                     </MenuItem>
+                    <MenuItem Header="Сортировочными центрами" Foreground="#5e69ee">
+                        <MenuItem.InputBindings>
+                            <MouseBinding MouseAction="LeftClick" Command="{Binding Open}" CommandParameter="Сортировочными центрами" />
+                        </MenuItem.InputBindings>
+                    </MenuItem>
+                    <MenuItem Header="Пунктами выдачи товара" Foreground="#5e69ee">
+                        <MenuItem.InputBindings>
+                            <MouseBinding MouseAction="LeftClick" Command="{Binding Open}" CommandParameter="Пунктами выдачи товара" />
+                        </MenuItem.InputBindings>
+                    </MenuItem>
                     <MenuItem Header="Транспортными средствами" Foreground="#5e69ee">
                         <MenuItem.InputBindings>
                             <MouseBinding MouseAction="LeftClick" Command="{Binding Open}" CommandParameter="Управление транспортными средствами" />
@@ -106,6 +116,16 @@
                     <MenuItem Header="Склад" Foreground="#5e69ee">
                         <MenuItem.InputBindings>
                             <MouseBinding MouseAction="LeftClick" Command="{Binding Open}" CommandParameter="Warehouse" />
+                        </MenuItem.InputBindings>
+                    </MenuItem>
+                    <MenuItem Header="Сортировочный центр" Foreground="#5e69ee">
+                        <MenuItem.InputBindings>
+                            <MouseBinding MouseAction="LeftClick" Command="{Binding Open}" CommandParameter="SortingСenter" />
+                        </MenuItem.InputBindings>
+                    </MenuItem>
+                    <MenuItem Header="Пункт выдачи заказов" Foreground="#5e69ee">
+                        <MenuItem.InputBindings>
+                            <MouseBinding MouseAction="LeftClick" Command="{Binding Open}" CommandParameter="OrderPickUpPoint" />
                         </MenuItem.InputBindings>
                     </MenuItem>
                     <MenuItem Header="Заказ" Foreground="#5e69ee">

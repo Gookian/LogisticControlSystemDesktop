@@ -13,19 +13,18 @@ using System.Windows.Data;
 
 namespace LogisticControlSystemDesktop.ViewModels.Pages
 {
-    public class VehicleManagementViewModel : BindableBase, INotifyPropertyChanged
+    public class OrderPickUpPointManagementViewModel : BindableBase, INotifyPropertyChanged
     {
-        private ObservableCollection<VehicleViewModel> _vihecles;
-        public ObservableCollection<VehicleViewModel> Vihecles
+        private ObservableCollection<OrderPickUpPointViewModel> _orderPickUpPoints;
+        public ObservableCollection<OrderPickUpPointViewModel> OrderPickUpPoints
         {
-            get { return _vihecles; }
+            get { return _orderPickUpPoints; }
             set
             {
-                _vihecles = value;
+                _orderPickUpPoints = value;
 
-                _itemSourceList = new CollectionViewSource() { Source = Vihecles };
+                _itemSourceList = new CollectionViewSource() { Source = OrderPickUpPoints };
                 _myData = _itemSourceList.View;
-                OnPropertyChanged(nameof(Vihecles));
             }
         }
 
@@ -69,25 +68,24 @@ namespace LogisticControlSystemDesktop.ViewModels.Pages
 
         private ICollectionView _myData;
 
-        private VehicleNotificationHub _hub = new VehicleNotificationHub();
-        private VehicleConverter _converter = new VehicleConverter();
+        private OrderPickUpPointNotificationHub _hub = new OrderPickUpPointNotificationHub();
+        private OrderPickUpPointConverter _converter = new OrderPickUpPointConverter();
         private CollectionViewSource _itemSourceList;
         private DataGrid _grid;
 
-        public VehicleManagementViewModel(DataGrid grid)
+        public OrderPickUpPointManagementViewModel(DataGrid grid)
         {
             _grid = grid;
 
-            Vihecles = new ObservableCollection<VehicleViewModel>();
-            Parametrs = new ObservableCollection<Parametr>();
-
-            Parametrs.Add(new Parametr { ID = 1, Text = "#", PropertyName = "Number" });
-            Parametrs.Add(new Parametr { ID = 2, Text = "Владелец", PropertyName = "Name" });
-            Parametrs.Add(new Parametr { ID = 2, Text = "Тип", PropertyName = "Type" });
-            Parametrs.Add(new Parametr { ID = 2, Text = "Марка", PropertyName = "Brand" });
-            Parametrs.Add(new Parametr { ID = 2, Text = "Регестрационны номер", PropertyName = "RegistrationNumber" });
-            Parametrs.Add(new Parametr { ID = 2, Text = "Вместимость", PropertyName = "Capacity" });
-            Parametrs.Add(new Parametr { ID = 2, Text = "Грузоподъемность", PropertyName = "LoadCapacity" });
+            OrderPickUpPoints = new ObservableCollection<OrderPickUpPointViewModel>();
+            Parametrs = new ObservableCollection<Parametr>
+            {
+                new Parametr { ID = 1, Text = "#", PropertyName = "Number" },
+                new Parametr { ID = 2, Text = "Наименование", PropertyName = "Name" },
+                new Parametr { ID = 3, Text = "Адрес", PropertyName = "Address" },
+                new Parametr { ID = 4, Text = "Широта", PropertyName = "Latitude" },
+                new Parametr { ID = 5, Text = "Долгота", PropertyName = "Longitude" },
+            };
             ParametrSelected = Parametrs[0];
 
             _hub.OnReceivedNotification += hub_OnReceivedNotification;
@@ -96,7 +94,7 @@ namespace LogisticControlSystemDesktop.ViewModels.Pages
             Load();
         }
 
-        private void hub_OnReceivedNotification(Vehicle entity, UpdateType type)
+        private void hub_OnReceivedNotification(OrderPickUpPoint entity, UpdateType type)
         {
             switch (type)
             {
@@ -112,54 +110,52 @@ namespace LogisticControlSystemDesktop.ViewModels.Pages
             }
         }
 
-        private void Create(Vehicle entity)
+        private void Create(OrderPickUpPoint entity)
         {
             var viewModel = _converter.Convert(entity);
-            viewModel.BgColor.Freeze();
 
             Application.Current.Dispatcher.Invoke(() =>
             {
-                _vihecles.Add(viewModel);
+                _orderPickUpPoints.Add(viewModel);
             });
         }
 
-        private void Update(Vehicle entity)
+        private void Update(OrderPickUpPoint entity)
         {
             var viewModel = _converter.Convert(entity);
-            var item = _vihecles.FirstOrDefault(x => x.Number == viewModel.Number);
-            viewModel.BgColor.Freeze();
+            var item = _orderPickUpPoints.FirstOrDefault(x => x.Number == viewModel.Number);
 
             Application.Current.Dispatcher.Invoke(() =>
             {
-                int index = _vihecles.IndexOf(item);
-                _vihecles[index] = viewModel;
+                int index = _orderPickUpPoints.IndexOf(item);
+                _orderPickUpPoints[index] = viewModel;
             });
         }
 
-        private void Delete(Vehicle entity)
+        private void Delete(OrderPickUpPoint entity)
         {
             var viewModel = _converter.Convert(entity);
-            var item = _vihecles.FirstOrDefault(x => x.Number == viewModel.Number);
+            var item = _orderPickUpPoints.FirstOrDefault(x => x.Number == viewModel.Number);
 
             Application.Current.Dispatcher.Invoke(() =>
             {
-                _vihecles.Remove(item);
+                _orderPickUpPoints.Remove(item);
             });
         }
 
         private void Load()
         {
-            _vihecles.Clear();
+            _orderPickUpPoints.Clear();
 
-            var vehicles = VehicleAPI.Instance.GetAll() as IEnumerable<Vehicle>;
-            var viewModels = _converter.Convert(vehicles);
+            var OrderPickUpPoints = OrderPickUpPointAPI.Instance.GetAll() as IEnumerable<OrderPickUpPoint>;
+            var viewModels = _converter.Convert(OrderPickUpPoints);
 
-            _vihecles.AddRange(viewModels);
+            _orderPickUpPoints.AddRange(viewModels);
         }
 
         private bool FilterData(object item)
         {
-            var value = (VehicleViewModel)item;
+            var value = (OrderPickUpPointViewModel)item;
             if (value == null)
                 return false;
 

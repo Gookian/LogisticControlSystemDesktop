@@ -43,6 +43,8 @@ namespace LogisticControlSystemDesktop.ViewModels
             _registerScreen.Add("Главная", typeof(Home));
             _registerScreen.Add("Управление транспортными средствами", typeof(VehicleManagement));
             _registerScreen.Add("Управление складами", typeof(WarehouseManagement));
+            _registerScreen.Add("Сортировочными центрами", typeof(SortingСenterManagement));
+            _registerScreen.Add("Пунктами выдачи товара", typeof(OrderPickUpPointManagement));
             _registerScreen.Add("Управление маршрутами", typeof(FlightManagement));
             _registerScreen.Add("Управление заказами", typeof(OrderManagement));
             _registerScreen.Add("Управление посылками", typeof(PackageManagement));
@@ -51,6 +53,8 @@ namespace LogisticControlSystemDesktop.ViewModels
             _registerScreen.Add("Управление точками доставки", typeof(DeliveryPointManagement));
             _registerScreen.Add("Vehicle", typeof(Create));
             _registerScreen.Add("Warehouse", typeof(Create));
+            _registerScreen.Add("SortingСenter", typeof(Create));
+            _registerScreen.Add("OrderPickUpPoint", typeof(Create));
             _registerScreen.Add("DeliveryPoint", typeof(Create));
             _registerScreen.Add("Order", typeof(Create));
             _registerScreen.Add("Product", typeof(Create));
@@ -77,7 +81,7 @@ namespace LogisticControlSystemDesktop.ViewModels
                 else
                 {
                     Assembly assembly = Assembly.GetExecutingAssembly();
-                    BaseEntityAPI api = assembly.CreateInstance($"LogisticControlSystemDesktop.REST.API.{title}API") as BaseEntityAPI;
+                    BaseEntityAPI api = assembly.CreateInstance($"LogisticControlSystemDesktop.Models.REST.API.{title}API") as BaseEntityAPI;
                     Type typeEntyty = Type.GetType($"LogisticControlSystemDesktop.Models.{title}");
                     Type typeView = Type.GetType("LogisticControlSystemDesktop.Views.Pages.Create");
 
@@ -89,6 +93,12 @@ namespace LogisticControlSystemDesktop.ViewModels
                             break;
                         case "Warehouse":
                             screenName = "Cоздание склада";
+                            break;
+                        case "SortingСenter":
+                            screenName = "Cоздание сортировочного центра";
+                            break;
+                        case "OrderPickUpPoint":
+                            screenName = "Cоздание пункта выдачи заказов";
                             break;
                         case "DeliveryPoint":
                             screenName = "Cоздание точки доставки";

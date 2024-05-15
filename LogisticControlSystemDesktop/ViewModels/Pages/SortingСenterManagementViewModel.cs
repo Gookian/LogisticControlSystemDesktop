@@ -13,19 +13,18 @@ using System.Windows.Data;
 
 namespace LogisticControlSystemDesktop.ViewModels.Pages
 {
-    public class VehicleManagementViewModel : BindableBase, INotifyPropertyChanged
+    public class SortingСenterManagementViewModel : BindableBase, INotifyPropertyChanged
     {
-        private ObservableCollection<VehicleViewModel> _vihecles;
-        public ObservableCollection<VehicleViewModel> Vihecles
+        private ObservableCollection<SortingСenterViewModel> _sortingСenters;
+        public ObservableCollection<SortingСenterViewModel> SortingСenters
         {
-            get { return _vihecles; }
+            get { return _sortingСenters; }
             set
             {
-                _vihecles = value;
+                _sortingСenters = value;
 
-                _itemSourceList = new CollectionViewSource() { Source = Vihecles };
+                _itemSourceList = new CollectionViewSource() { Source = SortingСenters };
                 _myData = _itemSourceList.View;
-                OnPropertyChanged(nameof(Vihecles));
             }
         }
 
@@ -69,25 +68,24 @@ namespace LogisticControlSystemDesktop.ViewModels.Pages
 
         private ICollectionView _myData;
 
-        private VehicleNotificationHub _hub = new VehicleNotificationHub();
-        private VehicleConverter _converter = new VehicleConverter();
+        private SortingСenterNotificationHub _hub = new SortingСenterNotificationHub();
+        private SortingСenterConverter _converter = new SortingСenterConverter();
         private CollectionViewSource _itemSourceList;
         private DataGrid _grid;
 
-        public VehicleManagementViewModel(DataGrid grid)
+        public SortingСenterManagementViewModel(DataGrid grid)
         {
             _grid = grid;
 
-            Vihecles = new ObservableCollection<VehicleViewModel>();
-            Parametrs = new ObservableCollection<Parametr>();
-
-            Parametrs.Add(new Parametr { ID = 1, Text = "#", PropertyName = "Number" });
-            Parametrs.Add(new Parametr { ID = 2, Text = "Владелец", PropertyName = "Name" });
-            Parametrs.Add(new Parametr { ID = 2, Text = "Тип", PropertyName = "Type" });
-            Parametrs.Add(new Parametr { ID = 2, Text = "Марка", PropertyName = "Brand" });
-            Parametrs.Add(new Parametr { ID = 2, Text = "Регестрационны номер", PropertyName = "RegistrationNumber" });
-            Parametrs.Add(new Parametr { ID = 2, Text = "Вместимость", PropertyName = "Capacity" });
-            Parametrs.Add(new Parametr { ID = 2, Text = "Грузоподъемность", PropertyName = "LoadCapacity" });
+            SortingСenters = new ObservableCollection<SortingСenterViewModel>();
+            Parametrs = new ObservableCollection<Parametr>
+            {
+                new Parametr { ID = 1, Text = "#", PropertyName = "Number" },
+                new Parametr { ID = 2, Text = "Наименование", PropertyName = "Name" },
+                new Parametr { ID = 3, Text = "Адрес", PropertyName = "Address" },
+                new Parametr { ID = 4, Text = "Широта", PropertyName = "Latitude" },
+                new Parametr { ID = 5, Text = "Долгота", PropertyName = "Longitude" },
+            };
             ParametrSelected = Parametrs[0];
 
             _hub.OnReceivedNotification += hub_OnReceivedNotification;
@@ -96,7 +94,7 @@ namespace LogisticControlSystemDesktop.ViewModels.Pages
             Load();
         }
 
-        private void hub_OnReceivedNotification(Vehicle entity, UpdateType type)
+        private void hub_OnReceivedNotification(SortingСenter entity, UpdateType type)
         {
             switch (type)
             {
@@ -112,54 +110,52 @@ namespace LogisticControlSystemDesktop.ViewModels.Pages
             }
         }
 
-        private void Create(Vehicle entity)
+        private void Create(SortingСenter entity)
         {
             var viewModel = _converter.Convert(entity);
-            viewModel.BgColor.Freeze();
 
             Application.Current.Dispatcher.Invoke(() =>
             {
-                _vihecles.Add(viewModel);
+                _sortingСenters.Add(viewModel);
             });
         }
 
-        private void Update(Vehicle entity)
+        private void Update(SortingСenter entity)
         {
             var viewModel = _converter.Convert(entity);
-            var item = _vihecles.FirstOrDefault(x => x.Number == viewModel.Number);
-            viewModel.BgColor.Freeze();
+            var item = _sortingСenters.FirstOrDefault(x => x.Number == viewModel.Number);
 
             Application.Current.Dispatcher.Invoke(() =>
             {
-                int index = _vihecles.IndexOf(item);
-                _vihecles[index] = viewModel;
+                int index = _sortingСenters.IndexOf(item);
+                _sortingСenters[index] = viewModel;
             });
         }
 
-        private void Delete(Vehicle entity)
+        private void Delete(SortingСenter entity)
         {
             var viewModel = _converter.Convert(entity);
-            var item = _vihecles.FirstOrDefault(x => x.Number == viewModel.Number);
+            var item = _sortingСenters.FirstOrDefault(x => x.Number == viewModel.Number);
 
             Application.Current.Dispatcher.Invoke(() =>
             {
-                _vihecles.Remove(item);
+                _sortingСenters.Remove(item);
             });
         }
 
         private void Load()
         {
-            _vihecles.Clear();
+            _sortingСenters.Clear();
 
-            var vehicles = VehicleAPI.Instance.GetAll() as IEnumerable<Vehicle>;
-            var viewModels = _converter.Convert(vehicles);
+            var SortingСenters = SortingСenterAPI.Instance.GetAll() as IEnumerable<SortingСenter>;
+            var viewModels = _converter.Convert(SortingСenters);
 
-            _vihecles.AddRange(viewModels);
+            _sortingСenters.AddRange(viewModels);
         }
 
         private bool FilterData(object item)
         {
-            var value = (VehicleViewModel)item;
+            var value = (SortingСenterViewModel)item;
             if (value == null)
                 return false;
 

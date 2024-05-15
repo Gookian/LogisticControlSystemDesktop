@@ -13,7 +13,6 @@ using System.ComponentModel;
 using System.Collections.Generic;
 using LogisticControlSystemDesktop.Models.Navigators;
 using System.Globalization;
-using System.Text.RegularExpressions;
 
 namespace LogisticControlSystemDesktop.ViewModels.Pages
 {

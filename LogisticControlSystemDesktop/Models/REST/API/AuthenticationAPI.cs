@@ -1,8 +1,6 @@
 ﻿using System.Net.Http;
 using System;
 using System.Configuration;
-using Newtonsoft.Json;
-using System.Text;
 
 namespace LogisticControlSystemDesktop.Models.REST.API
 {

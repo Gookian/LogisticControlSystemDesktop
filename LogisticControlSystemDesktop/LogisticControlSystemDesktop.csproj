@@ -266,6 +266,8 @@
     <Compile Include="Models\DeliveryPoint.cs" />
     <Compile Include="Models\Flight.cs" />
     <Compile Include="Models\Hubs\ClientNotificationHub.cs" />
+    <Compile Include="Models\Hubs\SortingСenterNotificationHub.cs" />
+    <Compile Include="Models\Hubs\OrderPickUpPointNotificationHub.cs" />
     <Compile Include="Models\Hubs\WarehouseNotificationHub.cs" />
     <Compile Include="Models\Hubs\ProductNotificationHub.cs" />
     <Compile Include="Models\Hubs\ProductDataNotificationHub.cs" />
@@ -279,6 +281,7 @@
     <Compile Include="Models\Navigators\ShellNavigator.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\OrderDetail.cs" />
+    <Compile Include="Models\OrderPickUpPoint.cs" />
     <Compile Include="Models\Package.cs" />
     <Compile Include="Models\PackageState.cs" />
     <Compile Include="Models\PackageContent.cs" />
@@ -298,7 +301,10 @@
     <Compile Include="Models\REST\API\PackageAPI.cs" />
     <Compile Include="Models\REST\API\PackageContentAPI.cs" />
     <Compile Include="Models\REST\API\PackageStateAPI.cs" />
+    <Compile Include="Models\REST\API\OrderPickUpPointAPI.cs" />
+    <Compile Include="Models\REST\API\SortingСenterAPI.cs" />
     <Compile Include="Models\REST\API\WarehouseAPI.cs" />
+    <Compile Include="Models\SortingСenter.cs" />
     <Compile Include="Models\UpdateType.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\Warehouse.cs" />
@@ -308,6 +314,8 @@
     <Compile Include="Models\Сonverters\ProductDataConverter.cs" />
     <Compile Include="Models\Сonverters\ProductConverter.cs" />
     <Compile Include="Models\Сonverters\FlightConverter.cs" />
+    <Compile Include="Models\Сonverters\OrderPickUpPointConverter.cs" />
+    <Compile Include="Models\Сonverters\SortingСenterConverter.cs" />
     <Compile Include="Models\Сonverters\WarehouseConverter.cs" />
     <Compile Include="Models\Сonverters\VehicleConverter.cs" />
     <Compile Include="Models\Navigators\Navigator.cs" />
@@ -328,6 +336,8 @@
     <Compile Include="ViewModels\Pages\ProductsInWarehouseViewModel.cs" />
     <Compile Include="ViewModels\Pages\ProductManagementViewModel.cs" />
     <Compile Include="ViewModels\Pages\FlightManagementViewModel.cs" />
+    <Compile Include="ViewModels\Pages\SortingСenterManagementViewModel.cs" />
+    <Compile Include="ViewModels\Pages\OrderPickUpPointManagementViewModel.cs" />
     <Compile Include="ViewModels\Pages\WarehouseManagementViewModel.cs" />
     <Compile Include="ViewModels\Pages\MainViewModel.cs" />
     <Compile Include="ViewModels\UserControls\BaseFieldViewModel.cs" />
@@ -339,6 +349,8 @@
     <Compile Include="ViewModels\ProductDataViewModel.cs" />
     <Compile Include="ViewModels\ProductViewModel.cs" />
     <Compile Include="ViewModels\FlightViewModel.cs" />
+    <Compile Include="ViewModels\OrderPickUpPointViewModel.cs" />
+    <Compile Include="ViewModels\SortingСenterViewModel.cs" />
     <Compile Include="ViewModels\WarehouseViewModel.cs" />
     <Compile Include="ViewModels\VehicleViewModel.cs" />
     <Compile Include="ViewModels\UserControls\ButtonNavigateViewModel.cs" />
@@ -389,6 +401,12 @@
     </Compile>
     <Compile Include="Views\Pages\FlightManagement.xaml.cs">
       <DependentUpon>FlightManagement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\OrderPickUpPointManagement.xaml.cs">
+      <DependentUpon>OrderPickUpPointManagement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\SortingСenterManagement.xaml.cs">
+      <DependentUpon>SortingСenterManagement.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Pages\WarehouseManagement.xaml.cs">
       <DependentUpon>WarehouseManagement.xaml</DependentUpon>
@@ -494,6 +512,14 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Pages\FlightManagement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Pages\OrderPickUpPointManagement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Pages\SortingСenterManagement.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

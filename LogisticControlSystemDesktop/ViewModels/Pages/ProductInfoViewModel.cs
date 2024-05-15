@@ -1,13 +1,7 @@
 ﻿using LogisticControlSystemDesktop.Models;
-using LogisticControlSystemDesktop.Models.converters;
-using LogisticControlSystemDesktop.REST.API;
+using LogisticControlSystemDesktop.Models.REST.API;
 using Prism.Mvvm;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
-using System.Windows.Controls;
-using System.Windows.Data;
 
 namespace LogisticControlSystemDesktop.ViewModels.Pages
 {

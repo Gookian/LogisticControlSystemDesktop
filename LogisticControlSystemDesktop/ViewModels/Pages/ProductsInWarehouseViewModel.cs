@@ -1,6 +1,6 @@
 ﻿using LogisticControlSystemDesktop.Models;
 using LogisticControlSystemDesktop.Models.converters;
-using LogisticControlSystemDesktop.REST.API;
+using LogisticControlSystemDesktop.Models.REST.API;
 using Prism.Mvvm;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

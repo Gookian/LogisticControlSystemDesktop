@@ -2,17 +2,17 @@
 
 namespace LogisticControlSystemDesktop.Models.REST.API
 {
-    public class DeliveryAPI : BaseEntityAPI
+    public class SortingСenterAPI : BaseEntityAPI
     {
-        public static DeliveryAPI Instance { get; set; }
+        public static SortingСenterAPI Instance { get; set; }
 
         protected override string ControllerName { get => base.ControllerName; set => base.ControllerName = value; }
         protected override Type TypeObject { get => base.TypeObject; set => base.TypeObject = value; }
 
-        public DeliveryAPI() : base()
+        public SortingСenterAPI() : base()
         {
-            ControllerName = "Delivery";
-            TypeObject = typeof(Delivery);
+            ControllerName = "SortingСenter";
+            TypeObject = typeof(SortingСenter);
 
             if (Instance != this)
             {

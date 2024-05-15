@@ -1,8 +1,6 @@
 ﻿using System;
-using LogisticControlSystemDesktop.Models;
-using LogisticControlSystemDesktop.Models.REST.API;
 
-namespace LogisticControlSystemDesktop.REST.API
+namespace LogisticControlSystemDesktop.Models.REST.API
 {
     public class OrderAPI : BaseEntityAPI
     {
