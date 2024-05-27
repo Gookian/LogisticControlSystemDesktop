@@ -1,4 +1,5 @@
-﻿using LogisticControlSystemDesktop.Models.Navigators;
+﻿using LogisticControlSystemDesktop.Models;
+using LogisticControlSystemDesktop.Models.Navigators;
 using LogisticControlSystemDesktop.Models.REST.API;
 using LogisticControlSystemDesktop.ViewModels.UserControls;
 using LogisticControlSystemDesktop.Views.Pages;
@@ -9,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace LogisticControlSystemDesktop.ViewModels
@@ -51,12 +53,12 @@ namespace LogisticControlSystemDesktop.ViewModels
             _registerScreen.Add("Управление товарами", typeof(ProductManagement));
             _registerScreen.Add("Управление данными товаров", typeof(ProductDataManagement));
             _registerScreen.Add("Управление точками доставки", typeof(DeliveryPointManagement));
+            _registerScreen.Add("Cоздание заказа", typeof(CreateOrder));
             _registerScreen.Add("Vehicle", typeof(Create));
             _registerScreen.Add("Warehouse", typeof(Create));
             _registerScreen.Add("SortingСenter", typeof(Create));
             _registerScreen.Add("OrderPickUpPoint", typeof(Create));
             _registerScreen.Add("DeliveryPoint", typeof(Create));
-            _registerScreen.Add("Order", typeof(Create));
             _registerScreen.Add("Product", typeof(Create));
             _registerScreen.Add("ProductData", typeof(Create));
         }
@@ -73,7 +75,11 @@ namespace LogisticControlSystemDesktop.ViewModels
             {
                 var screen = _registerScreen[title];
 
-                if (screen != typeof(Create))
+                if (screen == typeof(CreateOrder))
+                {
+                    MainNavigator.Instance.Open(new CreateOrder(title, OrderAPI.Instance, typeof(Order)), title);
+                }
+                else if (screen != typeof(Create))
                 {
                     object instance = Activator.CreateInstance(screen);
                     MainNavigator.Instance.Open((UserControl)instance, title);
@@ -102,9 +108,6 @@ namespace LogisticControlSystemDesktop.ViewModels
                             break;
                         case "DeliveryPoint":
                             screenName = "Cоздание точки доставки";
-                            break;
-                        case "Order":
-                            screenName = "Cоздание заказа";
                             break;
                         case "Product":
                             screenName = "Cоздание товара";

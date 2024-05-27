@@ -39,12 +39,13 @@ namespace LogisticControlSystemDesktop.ViewModels.UserControls
             Title = title;
             Hint = hint;
             Value = value;
+            OnPropertyChanged(nameof(Value));
 
             _pattern = new Regex(pattern);
             _maxCount = max;
             _minCount = min;
 
-            Text = Value.Length + "/" + _maxCount;
+            Text = value.Length + "/" + _maxCount;
             OnPropertyChanged(nameof(Text));
         }
 

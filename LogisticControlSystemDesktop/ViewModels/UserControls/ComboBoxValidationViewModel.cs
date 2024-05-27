@@ -68,7 +68,7 @@ namespace LogisticControlSystemDesktop.ViewModels.UserControls
         private ObservableCollection<IdTargetValueItem> GetParametrs()
         {
             Assembly assembly = Assembly.GetExecutingAssembly();
-            BaseEntityAPI api = assembly.CreateInstance($"LogisticControlSystemDesktop.REST.API.{FieldName.Substring(0, FieldName.Length - 2)}API") as BaseEntityAPI;
+            BaseEntityAPI api = assembly.CreateInstance($"LogisticControlSystemDesktop.Models.REST.API.{FieldName.Substring(0, FieldName.Length - 2)}API") as BaseEntityAPI;
 
             var items = api.GetIdTargetValues() as IEnumerable<object>;
 

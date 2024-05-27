@@ -130,7 +130,7 @@
                     </MenuItem>
                     <MenuItem Header="Заказ" Foreground="#5e69ee">
                         <MenuItem.InputBindings>
-                            <MouseBinding MouseAction="LeftClick" Command="{Binding Open}" CommandParameter="Order" />
+                            <MouseBinding MouseAction="LeftClick" Command="{Binding Open}" CommandParameter="Cоздание заказа" />
                         </MenuItem.InputBindings>
                     </MenuItem>
                 </MenuItem>

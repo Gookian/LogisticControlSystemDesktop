@@ -19,6 +19,7 @@ namespace LogisticControlSystemDesktop
             new WarehouseAPI();
             new FlightAPI();
             new OrderAPI();
+            new OrderDetailAPI();
             new OrderPickUpPointAPI();
             new PackageAPI();
             new PackageStateAPI();

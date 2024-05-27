@@ -19,11 +19,20 @@ namespace LogisticControlSystemDesktop.ViewModels
 
         public DelegateCommand DeleteClick { get; set; }
         public DelegateCommand EditClick { get; set; }
+        public DelegateCommand OpenOrderDetailClick { get; set; }
 
         public OrderViewModel()
         {
             DeleteClick = new DelegateCommand(Delete_Click);
             EditClick = new DelegateCommand(Edit_Click);
+            OpenOrderDetailClick = new DelegateCommand(OpenOrderDetail_Click);
+        }
+
+        private void OpenOrderDetail_Click()
+        {
+            var view = new OrderDetailManagment(Number, $"Детали заказа для: {MiddleName} {FirstName} {Surname}");
+
+            MainNavigator.Instance.Open(view, "Детали заказа");
         }
 
         public void Delete_Click()

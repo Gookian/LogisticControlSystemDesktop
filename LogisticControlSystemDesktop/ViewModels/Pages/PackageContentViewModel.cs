@@ -1,11 +1,13 @@
 ﻿using LogisticControlSystemDesktop.Models;
 using LogisticControlSystemDesktop.Models.converters;
+using LogisticControlSystemDesktop.Models.Hubs;
 using LogisticControlSystemDesktop.Models.REST.API;
 using Prism.Mvvm;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 
@@ -68,6 +70,7 @@ namespace LogisticControlSystemDesktop.ViewModels.Pages
 
         private ICollectionView _myData;
 
+        //private ProductNotificationHub _hub = new ProductNotificationHub();
         private ProductConverter _converter = new ProductConverter();
         private CollectionViewSource _itemSourceList;
         private DataGrid _grid;
@@ -90,8 +93,60 @@ namespace LogisticControlSystemDesktop.ViewModels.Pages
             };
             ParametrSelected = Parametrs[0];
 
+            //_hub.OnReceivedNotification += hub_OnReceivedNotification;
+            //_hub.ConnectAsync();
+
             Load();
         }
+
+        /*private void hub_OnReceivedNotification(Product entity, UpdateType type)
+        {
+            switch (type)
+            {
+                case UpdateType.Add:
+                    Create(entity);
+                    break;
+                case UpdateType.Uppdate:
+                    Update(entity);
+                    break;
+                case UpdateType.Delete:
+                    Delete(entity);
+                    break;
+            }
+        }
+
+        private void Create(Product entity)
+        {
+            var viewModel = _converter.Convert(entity);
+
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                _products.Add(viewModel);
+            });
+        }
+
+        private void Update(Product entity)
+        {
+            var viewModel = _converter.Convert(entity);
+            var item = _products.FirstOrDefault(x => x.Number == viewModel.Number);
+
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                int index = _products.IndexOf(item);
+                _products[index] = viewModel;
+            });
+        }
+
+        private void Delete(Product entity)
+        {
+            var viewModel = _converter.Convert(entity);
+            var item = _products.FirstOrDefault(x => x.Number == viewModel.Number);
+
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                _products.Remove(item);
+            });
+        }*/
 
         private void Load()
         {

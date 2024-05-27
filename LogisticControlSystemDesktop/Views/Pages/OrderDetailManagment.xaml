@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="LogisticControlSystemDesktop.Views.Pages.OrderManagement"
+﻿<UserControl x:Class="LogisticControlSystemDesktop.Views.Pages.OrderDetailManagment"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -8,7 +8,6 @@
              xmlns:local="clr-namespace:LogisticControlSystemDesktop.Views.Pages"
              mc:Ignorable="d" 
              d:DesignHeight="1050" d:DesignWidth="1900"
-             prism:ViewModelLocator.AutoWireViewModel="True"
     xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2">
     <Grid>
         <Border Background="#FFF4F4FB" CornerRadius="10" Margin="10">
@@ -25,7 +24,7 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="auto"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Grid.Row="0" Grid.Column="0" Text="Заказы" Foreground="#5e69ee" FontWeight="Bold" FontSize="20" Margin="0 0 0 20"></TextBlock>
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding Title, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Foreground="#5e69ee" FontWeight="Bold" FontSize="20" Margin="0 0 0 20"></TextBlock>
                 <ComboBox ItemsSource="{Binding Path=Parametrs}" SelectedValue="{Binding Path=ParametrSelected}" Style="{DynamicResource CustomComboBoxStyle}" ItemsPanel="{DynamicResource CustomComboBoxItemsPanel}" ItemContainerStyle="{DynamicResource CustomComboBoxItemContainerStyle}" ItemTemplate="{DynamicResource CustomComboBoxItemTemplate}" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" Width="200" Margin="10 0 10 0"/>
                 <TextBox Name="search" Grid.Row="0" Grid.Column="2" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Style="{DynamicResource CustomTextBoxSearchStyle}" Width="400" HorizontalAlignment="Right"/>
                 <TextBlock Grid.Row="0" Grid.Column="2" Text="Введите строку для поиска" VerticalAlignment="Center" Padding="15 0 0 0" IsHitTestVisible="False" Foreground="#AA333333">
@@ -41,7 +40,7 @@
                     </TextBlock.Style>
                 </TextBlock>
                 <ScrollViewer x:Name="scrollWiever" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Style="{DynamicResource CustomScrollViewerStyle}" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                    <DataGrid Width="1450" ItemsSource="{Binding Orders}" Style="{DynamicResource CustomDataGridStyle}" CellStyle="{DynamicResource CustomDataGridCellStyle}" ColumnHeaderStyle="{DynamicResource CustomDataGridColumnHeaderStyle}" RowStyle="{DynamicResource CustomDataGridRowStyle}" x:Name="myData">
+                    <DataGrid Width="1450" ItemsSource="{Binding OrderDetails}" Style="{DynamicResource CustomDataGridStyle}" CellStyle="{DynamicResource CustomDataGridCellStyle}" ColumnHeaderStyle="{DynamicResource CustomDataGridColumnHeaderStyle}" RowStyle="{DynamicResource CustomDataGridRowStyle}" x:Name="myData">
                         <DataGrid.Columns>
                             <DataGridCheckBoxColumn CanUserResize="False" Width="auto" ElementStyle="{StaticResource CustomCheckBoxStyle}">
                                 <DataGridCheckBoxColumn.HeaderTemplate>
@@ -51,22 +50,9 @@
                                 </DataGridCheckBoxColumn.HeaderTemplate>
                             </DataGridCheckBoxColumn>
                             <DataGridTextColumn Header="#" IsReadOnly="True" CanUserResize="False" Width="auto" Binding="{Binding Number}"/>
-                            <DataGridTextColumn Header="Фамилия" IsReadOnly="True" CanUserResize="False" Width="auto" Binding="{Binding MiddleName}"/>
-                            <DataGridTextColumn Header="Имя" IsReadOnly="True" CanUserResize="False" Width="auto" Binding="{Binding FirstName}"/>
-                            <DataGridTextColumn Header="Отчество" IsReadOnly="True" CanUserResize="False" Width="auto" Binding="{Binding Surname}"/>
-                            <DataGridTextColumn Header="Адрес" IsReadOnly="True" CanUserResize="False" Width="*" Binding="{Binding Address}"/>
-                            <DataGridTextColumn Header="Дата доставки" IsReadOnly="True" CanUserResize="False" Width="auto" Binding="{Binding DeliveryDateTime}"/>
-                            <DataGridTemplateColumn Header="Товары на складе" IsReadOnly="True" Width="*">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <Button Style="{DynamicResource CustomButtonStyle}" Content="Детали заказа" FontSize="13" Height="40">
-                                            <Button.InputBindings>
-                                                <MouseBinding MouseAction="LeftClick" Command="{Binding OpenOrderDetailClick}" />
-                                            </Button.InputBindings>
-                                        </Button>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
+                            <DataGridTextColumn Header="Тип товара" IsReadOnly="True" CanUserResize="False" Width="*" Binding="{Binding ProductName}"/>
+                            <DataGridTextColumn Header="Количество" IsReadOnly="True" CanUserResize="False" Width="*" Binding="{Binding Count}"/>
+                            <DataGridTextColumn Header="Стоимость" IsReadOnly="True" CanUserResize="False" Width="*" Binding="{Binding Sum}"/>
                             <DataGridTemplateColumn Header="Операции" IsReadOnly="True" Width="auto">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
